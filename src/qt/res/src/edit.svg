@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="edit.svg"
+   inkscape:export-filename="/home/daniel/cc/Bolt Wallet/src/qt/res/icons/edit.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="-231.81271"
+     inkscape:cy="155.30819"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="718"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-796.36216)">
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:245.97305298px;line-height:125%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text3649">
+      <path
+         d="m 127.46811,972.67866 -7.68672,0 0,-13.17723 -13.17723,0 0,-7.68672 15.92248,-15.92249 20.86395,20.86395 -15.92248,15.92249 z m 60.39564,-98.82924 c 1.23537,1.23537 1.0981,3.29431 -0.13726,4.52968 l -48.04199,48.04199 c -1.23537,1.23536 -3.29431,1.37263 -4.52967,0.13726 -1.23537,-1.23536 -1.09811,-3.29431 0.13726,-4.52967 l 48.04199,-48.04199 c 1.23536,-1.23537 3.29431,-1.37263 4.52967,-0.13727 z m 10.98103,81.53413 c 0,-1.78442 -1.0981,-3.29431 -2.74526,-3.98063 -1.64715,-0.68631 -3.43157,-0.41178 -4.8042,0.96084 l -8.78482,8.78482 c -0.82358,0.82358 -1.23536,1.92168 -1.23536,3.01979 l 0,17.29511 c 0,12.07913 -9.88293,21.96202 -21.96206,21.96202 l -114.202671,0 c -12.079129,0 -21.962053,-9.88289 -21.962053,-21.96202 l 0,-114.20267 c 0,-12.07913 9.882924,-21.96205 21.962053,-21.96205 l 114.202671,0 c 2.05895,0 4.11789,0.27452 6.17683,0.82357 1.50989,0.54905 3.15705,0.13727 4.39241,-1.0981 l 6.72588,-6.72588 c 1.0981,-1.0981 1.50989,-2.47073 1.23537,-3.98062 -0.27453,-1.37263 -1.23537,-2.60799 -2.47074,-3.15705 -5.07872,-2.33346 -10.56923,-3.43157 -16.05975,-3.43157 l -114.202671,0 c -21.82479,0 -39.5316951,17.70691 -39.5316951,39.5317 l 0,114.20267 c 0,21.82482 17.7069051,39.53172 39.5316951,39.53172 l 114.202671,0 c 21.82479,0 39.5317,-17.7069 39.5317,-39.53172 l 0,-26.07993 z m -13.17723,-101.29997 -92.240625,92.24062 0,39.53169 39.531695,0 92.24062,-92.24062 -39.53169,-39.53169 z m 60.94469,18.11869 c 5.07873,-5.07872 5.07873,-13.58902 0,-18.66774 l -20.86395,-20.86395 c -5.07872,-5.07873 -13.58902,-5.07873 -18.66774,0 l -12.62818,12.62818 39.53169,39.53169 12.62818,-12.62818 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:245.97499084px;line-height:125%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#333333;fill-opacity:1"
+         id="path3336" />
+    </g>
+  </g>
+</svg>

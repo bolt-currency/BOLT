@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="editpaste.svg"
+   inkscape:export-filename="/home/daniel/cc/Bolt Wallet/src/qt/res/icons/editpaste.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="-231.81271"
+     inkscape:cy="155.30819"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="718"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-796.36216)">
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:245.97305298px;line-height:125%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text3649">
+      <path
+         d="m 110.4305,1029.7792 0,-158.12551 52.70851,0 0,57.10088 c 0,7.27488 5.90225,13.17713 13.17713,13.17713 l 57.10088,0 0,87.8475 -122.98652,0 z m 35.139,-197.6569 c 0,2.33345 -2.05892,4.39238 -4.39237,4.39238 l -96.632273,0 c -2.33345,0 -4.392376,-2.05893 -4.392376,-4.39238 l 0,-8.78475 c 0,-2.33345 2.058926,-4.39237 4.392376,-4.39237 l 96.632273,0 c 2.33345,0 4.39237,2.05892 4.39237,4.39237 l 0,8.78475 z m 35.13901,92.2399 0,-41.04126 41.04126,41.04126 -41.04126,0 z m 70.27802,17.5695 c 0,-7.27487 -4.11786,-17.29498 -9.3338,-22.51093 l -56.0028,-56.00279 c -1.50987,-1.50988 -3.15702,-2.74523 -4.94142,-3.84333 l 0,-45.02185 c 0,-7.27487 -5.90225,-13.17713 -13.17713,-13.17713 l -149.340779,0 c -7.274872,0 -13.1771275,5.90226 -13.1771275,13.17713 l 0,184.47979 c 0,7.27491 5.9022555,13.17711 13.1771275,13.17711 l 74.670391,0 0,21.9619 c 0,7.2749 5.902256,13.1771 13.177128,13.1771 l 131.77128,0 c 7.27487,0 13.17713,-5.9022 13.17713,-13.1771 l 0,-92.2399 z"
+         style="fill:#333333;fill-opacity:1"
+         id="path3336" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="sign.svg"
+   inkscape:export-filename="/home/daniel/cc/Bolt Wallet/src/qt/res/icons/sign.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-394.59293"
+     inkscape:cy="-31.218407"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="718"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-796.36216)">
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:329.26980591px;line-height:125%;font-family:RaphaelIcons;-inkscape-font-specification:'RaphaelIcons, Medium';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text3649">
+      <path
+         d="m 112.08315,893.01077 q 7.71726,-11.5759 11.57589,-21.86558 3.85863,-10.28968 4.82329,-17.04228 0.96466,-6.75261 5.14484,-17.04229 4.50174,-10.61123 12.54055,-22.18712 3.21553,-4.50174 8.68192,-5.4664 0.96466,0 2.25087,0 4.18018,0 8.03881,2.57242 3.53708,2.57242 4.82329,7.71727 l 12.54055,-17.68539 38.90786,28.29662 -129.907233,179.10478 -56.9148,37.3001 18.006942,-65.91829 58.522561,-80.06658 q -3.53708,3.53707 -8.03881,0.6431 -1.92932,-1.28621 -2.57242,-3.85863 -0.32155,-2.89397 0.96466,-4.82329 1.60776,-1.92931 4.18018,-2.25086 2.57242,-0.64311 4.82329,0.96465 0.96465,0.64311 1.60776,1.60777 z M 83.464974,1000.7309 63.207163,986.261 l -9.003471,33.763 29.261282,-19.2931 z M 117.8711,891.403 157.74361,836.09597 q -4.50173,0.32155 -8.36036,-2.25087 -7.39571,11.25434 -14.79142,27.33196 -7.07416,16.07763 -16.72073,30.22594 z"
+         style="fill:#333333;fill-opacity:1"
+         id="path3336" />
+    </g>
+  </g>
+</svg>
