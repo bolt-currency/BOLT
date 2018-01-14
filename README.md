@@ -4,34 +4,34 @@ Bolt Core staging tree 0.9.1
 http://www.boltcurrency.com
 
 
-Copyright (c) 2009-2015 The Bitcoin Core Developers
-Copyright (c) 2017-2018 The Bolt Developers
+Copyright (c) 2009-2015 The Bitcoin Core Developers. <br />
+Copyright (c) 2017-2018 The Bolt Developers.
 
 
 What is Bolt?
 -----------------
 
-BOLT is an experimental new digital currency that enables anonymous, instant
+Bolt is an experimental new digital currency that enables anonymous, instant
 payments to anyone, anywhere in the world. BOLT uses peer-to-peer technology
 to operate with no central authority: managing transactions and issuing money
-are carried out collectively by the network. BOLT Core is the name of open
+are carried out collectively by the network. Bolt Core is the name of open
 source software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the BOLT Core software, see http://www.boltcurrency.com
+the Bolt Core software, see http://www.boltcurrency.com
 
 
 License
 -------
 
-BOLT Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Bolt Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see http://opensource.org/licenses/MIT.
 
 
 Building process
 -----------------
 
-**compiling BOLT from git**
+**compiling Bolt from git**
 
 Use the autogen script to prepare the build environment.
 
@@ -70,7 +70,7 @@ that run in -regtest mode.
 
 **DEBUG_LOCKORDER**
 
-BOLT Core is a multithreaded application, and deadlocks or other multithreading bugs
+Bolt Core is a multithreaded application, and deadlocks or other multithreading bugs
 can be very difficult to track down. Compiling with -DDEBUG_LOCKORDER (configure
 CXXFLAGS="-DDEBUG_LOCKORDER -g") inserts run-time checks to keep track of what locks
 are held, and adds warning to the debug.log file if inconsistencies are detected.
