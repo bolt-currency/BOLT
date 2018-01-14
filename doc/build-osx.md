@@ -1,6 +1,6 @@
 Mac OS X Build Instructions and Notes
 ====================================
-This guide will show you how to build dashd(headless client) for OSX.
+This guide will show you how to build boltd(headless client) for OSX.
 
 Notes
 -----
@@ -73,7 +73,7 @@ These rest of these commands are run inside brew interactive mode:
 /private/tmp/berkeley-db4-UGpd0O $ exit
 ```
 
-After exiting, you'll get a warning that the install is keg-only, which means it wasn't symlinked to `/usr/local`.  You don't need it to link it to build dash, but if you want to, here's how:
+After exiting, you'll get a warning that the install is keg-only, which means it wasn't symlinked to `/usr/local`.  You don't need it to link it to build bolt, but if you want to, here's how:
 
     $ brew --force link berkeley-db4
 
@@ -82,7 +82,7 @@ After exiting, you'll get a warning that the install is keg-only, which means it
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/dashpay/dash.git
+        git clone https://github.com/bolt-currency/bolt.git
         cd bolt
 
 2.  Build boltd:

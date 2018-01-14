@@ -1,7 +1,7 @@
 BOLT 0.9 BETA
 
 Copyright (c) 2009-2015 Bitcoin Core Developers
-Copyright (c) 2014-2015 Dash Core Developers
+Copyright (c) 2014-2015 Bolt Core Developers
 Copyright (c) 2014-2015 BOLT Core Developers
 
 Distributed under the MIT/X11 software license, see the accompanying

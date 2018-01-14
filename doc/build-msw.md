@@ -76,8 +76,8 @@ BOLT
 -------
 MSYS shell:
 
-	cd \dash
+	cd \bolt
 	sh autogen.sh
 	sh configure
 	mingw32-make
-	strip dashd.exe
+	strip boltd.exe

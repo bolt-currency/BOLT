@@ -170,7 +170,7 @@ libbolt_common_a_SOURCES = \
   version.cpp \
   aes_helper.c \
   spork.cpp \
-  blake/blake.c \
+  algorithm/blake.c \
   $(BITCOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT

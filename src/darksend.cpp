@@ -38,7 +38,7 @@ CActiveMasternode activeMasternode;
 // Count peers we've requested the list from
 int RequestedMasterNodeList = 0;
 
-/* *** BEGIN DARKSEND MAGIC - DASH **********
+/* *** BEGIN DARKSEND MAGIC - BOLT **********
     Copyright (c) 2014-2015, Dash Developers
         eduffield - evan@dashpay.io
         udjinm6   - udjinm6@dashpay.io
@@ -1484,7 +1484,7 @@ bool CDarksendPool::DoAutomaticDenominating(bool fDryRun, bool ready)
         if(sessionTotalValue > nBalanceNeedsAnonymized) sessionTotalValue = nBalanceNeedsAnonymized;
 
         double fDarkcoinSubmitted = (sessionTotalValue / CENT);
-        LogPrintf("Submitting Darksend for %f DASH CENT - sessionTotalValue %d\n", fDarkcoinSubmitted, sessionTotalValue);
+        LogPrintf("Submitting Darksend for %f BOLT CENT - sessionTotalValue %d\n", fDarkcoinSubmitted, sessionTotalValue);
 
         if(pwalletMain->GetDenominatedBalance(true, true) > 0){ //get denominated unconfirmed inputs
             LogPrintf("DoAutomaticDenominating -- Found unconfirmed denominated outputs, will wait till they confirm to continue.\n");

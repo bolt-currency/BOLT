@@ -218,8 +218,8 @@ Value setaccount(const Array& params, bool fHelp)
             "1. \"boltaddress\"  (string, required) The bolt address to be associated with an account.\n"
             "2. \"account\"         (string, required) The account to assign the address to.\n"
             "\nExamples:\n"
-            + HelpExampleCli("setaccount", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"tabby\"")
-            + HelpExampleRpc("setaccount", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", \"tabby\"")
+            + HelpExampleCli("setaccount", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"tabby\"")
+            + HelpExampleRpc("setaccount", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", \"tabby\"")
         );
 
     CBitcoinAddress address(params[0].get_str());
@@ -256,8 +256,8 @@ Value getaccount(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
             "\nExamples:\n"
-            + HelpExampleCli("getaccount", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"")
-            + HelpExampleRpc("getaccount", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"")
+            + HelpExampleCli("getaccount", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"")
+            + HelpExampleRpc("getaccount", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"")
         );
 
     CBitcoinAddress address(params[0].get_str());
@@ -322,9 +322,9 @@ Value sendtoaddress(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"transactionid\"  (string) The transaction id.\n"
             "\nExamples:\n"
-            + HelpExampleCli("sendtoaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.1")
-            + HelpExampleCli("sendtoaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.1 \"donation\" \"seans outpost\"")
-            + HelpExampleRpc("sendtoaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 0.1, \"donation\", \"seans outpost\"")
+            + HelpExampleCli("sendtoaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.1")
+            + HelpExampleCli("sendtoaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.1 \"donation\" \"seans outpost\"")
+            + HelpExampleRpc("sendtoaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 0.1, \"donation\", \"seans outpost\"")
         );
 
     CBitcoinAddress address(params[0].get_str());
@@ -413,11 +413,11 @@ Value signmessage(const Array& params, bool fHelp)
             "\nUnlock the wallet for 30 seconds\n"
             + HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
             "\nCreate the signature\n"
-            + HelpExampleCli("signmessage", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"my message\"") +
+            + HelpExampleCli("signmessage", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"my message\"") +
             "\nVerify the signature\n"
-            + HelpExampleCli("verifymessage", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"signature\" \"my message\"") +
+            + HelpExampleCli("verifymessage", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" \"signature\" \"my message\"") +
             "\nAs json rpc\n"
-            + HelpExampleRpc("signmessage", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", \"my message\"")
+            + HelpExampleRpc("signmessage", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", \"my message\"")
         );
 
     EnsureWalletIsUnlocked();
@@ -461,13 +461,13 @@ Value getreceivedbyaddress(const Array& params, bool fHelp)
             "amount   (numeric) The total amount in btc received at this address.\n"
             "\nExamples:\n"
             "\nThe amount from transactions with at least 1 confirmation\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"") +
+            + HelpExampleCli("getreceivedbyaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\"") +
             "\nThe amount including unconfirmed transactions, zero confirmations\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0") +
+            + HelpExampleCli("getreceivedbyaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0") +
             "\nThe amount with at least 6 confirmation, very safe\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 6") +
+            + HelpExampleCli("getreceivedbyaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 6") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("getreceivedbyaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 6")
+            + HelpExampleRpc("getreceivedbyaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 6")
        );
 
     // BOLT address
@@ -752,11 +752,11 @@ Value sendfrom(const Array& params, bool fHelp)
             "\"transactionid\"        (string) The transaction id.\n"
             "\nExamples:\n"
             "\nSend 0.01 btc from the default account to the address, must have at least 1 confirmation\n"
-            + HelpExampleCli("sendfrom", "\"\" \"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.01") +
+            + HelpExampleCli("sendfrom", "\"\" \"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.01") +
             "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n"
-            + HelpExampleCli("sendfrom", "\"tabby\" \"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.01 6 \"donation\" \"seans outpost\"") +
+            + HelpExampleCli("sendfrom", "\"tabby\" \"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 0.01 6 \"donation\" \"seans outpost\"") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("sendfrom", "\"tabby\", \"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 0.01, 6, \"donation\", \"seans outpost\"")
+            + HelpExampleRpc("sendfrom", "\"tabby\", \"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 0.01, 6, \"donation\", \"seans outpost\"")
         );
 
     string strAccount = AccountFromValue(params[0]);
@@ -812,11 +812,11 @@ Value sendmany(const Array& params, bool fHelp)
             "                                    the number of addresses.\n"
             "\nExamples:\n"
             "\nSend two amounts to two different addresses:\n"
-            + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\"") +
+            + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\"") +
             "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
-            + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\" 6 \"testing\"") +
+            + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\" 6 \"testing\"") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("sendmany", "\"tabby\", \"{\\\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\", 6, \"testing\"")
+            + HelpExampleRpc("sendmany", "\"tabby\", \"{\\\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\", 6, \"testing\"")
         );
 
     string strAccount = AccountFromValue(params[0]);
@@ -1672,7 +1672,7 @@ Value walletlock(const Array& params, bool fHelp)
             "\nSet the passphrase for 2 minutes to perform a transaction\n"
             + HelpExampleCli("walletpassphrase", "\"my pass phrase\" 120") +
             "\nPerform a send (requires passphrase set)\n"
-            + HelpExampleCli("sendtoaddress", "\"ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 1.0") +
+            + HelpExampleCli("sendtoaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\" 1.0") +
             "\nClear the passphrase since we are done before 2 minutes is up\n"
             + HelpExampleCli("walletlock", "") +
             "\nAs json rpc call\n"
