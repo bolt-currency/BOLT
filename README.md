@@ -3,8 +3,8 @@ BOLT Core staging tree 0.9.1
 
 http://www.boltcurrency.com
 
-Copyright (c) 2009-2015 Bitcoin Core Developers
-Copyright (c) 2017-2018 "Zero"
+Copyright (c) 2009-2015 The Bitcoin Core Developers
+Copyright (c) 2017-2018 The Bolt Developers
 
 
 
