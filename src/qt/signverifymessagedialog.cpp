@@ -28,7 +28,7 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
 
 #if QT_VERSION >= 0x040700
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
-    ui->addressIn_VM->setPlaceholderText(tr("Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)"));
+    ui->addressIn_VM->setPlaceholderText(tr("Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)"));
 #endif
 
     GUIUtil::setupAddressWidget(ui->addressIn_SM, this);

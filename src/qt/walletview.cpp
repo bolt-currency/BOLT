@@ -18,6 +18,7 @@
 #include "transactionview.h"
 #include "walletmodel.h"
 #include "masternodelist.h"
+#include "blockbrowser.h"
 
 #include "ui_interface.h"
 
@@ -68,12 +69,17 @@ WalletView::WalletView(QWidget *parent):
     sendCoinsPage = new SendCoinsDialog();
 
     masternodeList= new MasternodeList();
+
+    blockBrowser = new BlockBrowser();
+
     // loggerPage = new LoggerPage();
     addWidget(overviewPage);
     addWidget(transactionsPage);
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
     addWidget(masternodeList);
+    addWidget(blockBrowser);
+
     #if !defined(Q_OS_MAC)
     #if !defined(Q_OS_WIN)
     // addWidget(loggerPage);
@@ -182,6 +188,12 @@ void WalletView::gotoLoggerPage()
 {
 //    setCurrentWidget(loggerPage);
 }
+
+void WalletView::gotoBlockBrowser()
+{
+    setCurrentWidget(blockBrowser);
+}
+
 
 void WalletView::gotomasternodeList()
 {

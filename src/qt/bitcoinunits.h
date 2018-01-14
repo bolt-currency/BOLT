@@ -26,9 +26,9 @@ public:
      */
     enum Unit
     {
-        CHAINCOIN,
-        mCHAINCOIN,
-        uCHAINCOIN,
+        BOLT,
+        mBOLT,
+        uBOLT,
         chuffs
     };
 

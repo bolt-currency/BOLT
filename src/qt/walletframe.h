@@ -13,6 +13,7 @@ class ClientModel;
 class SendCoinsRecipient;
 class WalletModel;
 class WalletView;
+class BlockBrowser;
 
 QT_BEGIN_NAMESPACE
 class QStackedWidget;
@@ -61,6 +62,8 @@ public slots:
     /** Switch to send coins page */
     void gotoSendCoinsPage(QString addr = "");
 
+    void gotoBlockBrowser();
+
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
@@ -81,6 +84,7 @@ public slots:
     void usedSendingAddresses();
     /** Show used receiving addresses */
     void usedReceivingAddresses();
+
 };
 
 #endif // WALLETFRAME_H

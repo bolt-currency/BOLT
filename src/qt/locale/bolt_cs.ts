@@ -275,7 +275,7 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="113"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BOLT&lt;/b&gt;!</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1135,12 +1135,12 @@ Adresa: %4
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="78"/>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DASH</source>
+        <source>Use 2 separate masternodes to mix funds up to 1000 BOLT</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="91"/>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DASH</source>
+        <source>Use 8 separate masternodes to mix funds up to 1000 BOLT</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1150,17 +1150,17 @@ Adresa: %4
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="117"/>
-        <source>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</source>
+        <source>This option is the quickest and will cost about ~0.025 BOLT to anonymize 1000 BOLT</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="130"/>
-        <source>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</source>
+        <source>This option is moderately fast and will cost about 0.05 BOLT to anonymize 1000 BOLT</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="156"/>
-        <source>0.1 DASH per 1000 DASH you anonymize.</source>
+        <source>0.1 BOLT per 1000 BOLT you anonymize.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1808,7 +1808,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="349"/>
-        <source>0 DASH</source>
+        <source>0 BOLT</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1818,7 +1818,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="363"/>
-        <source>0 DASH / 0 Rounds</source>
+        <source>0 BOLT / 0 Rounds</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2176,7 +2176,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="101"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -2925,7 +2925,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="54"/>
-        <source>The address to send the payment to (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3042,7 +3042,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="48"/>
-        <source>The address to sign the message with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>The address to sign the message with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3115,7 +3115,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="258"/>
-        <source>The address the message was signed with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>The address the message was signed with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3140,7 +3140,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="31"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3868,7 +3868,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message numerus="yes">
         <location filename="../walletmodel.cpp" line="271"/>
-        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n DASH.</source>
+        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n BOLT.</source>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
 </context>
@@ -4129,7 +4129,7 @@ for example: alertnotify=echo %%s | mail -s &quot;BOLT Alert&quot; admin@foo.com
     </message>
     <message>
         <location filename="../boltstrings.cpp" line="138"/>
-        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 DASH.</source>
+        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 BOLT.</source>
         <translation type="unfinished"/>
     </message>
     <message>

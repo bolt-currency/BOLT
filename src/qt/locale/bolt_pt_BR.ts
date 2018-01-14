@@ -275,8 +275,8 @@ Este produto inclui software desenvolvido pelo Projeto OpenSSL para uso no OpenS
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="113"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</source>
-        <translation>Aviso: Se você encriptar sua wallet e perder sua senha, você vai &lt;b&gt;PERDER TODAS AS SUAS DASH&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BOLT&lt;/b&gt;!</source>
+        <translation>Aviso: Se você encriptar sua wallet e perder sua senha, você vai &lt;b&gt;PERDER TODAS AS SUAS BOLT&lt;/b&gt;!</translation>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="113"/>
@@ -352,7 +352,7 @@ Este produto inclui software desenvolvido pelo Projeto OpenSSL para uso no OpenS
     <message>
         <location filename="../bitcoingui.cpp" line="76"/>
         <source>BOLT Core</source>
-        <translation>BOLT Core</translation>
+        <translation>Bolt Core</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="85"/>
@@ -376,6 +376,11 @@ Este produto inclui software desenvolvido pelo Projeto OpenSSL para uso no OpenS
         <translation>&amp;Visão geral</translation>
     </message>
     <message>
+        <location filename="../bitcoingui.cpp" line="227"/>
+        <source>&amp;Block Explorer</source>
+        <translation>&amp;Explorador de Blocos</translation>
+    </message>
+    <message>
         <location filename="../bitcoingui.cpp" line="228"/>
         <source>Show general overview of wallet</source>
         <translation>Mostrar visão geral da carteira</translation>
@@ -387,8 +392,8 @@ Este produto inclui software desenvolvido pelo Projeto OpenSSL para uso no OpenS
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="235"/>
-        <source>Send coins to a BOLT address</source>
-        <translation>Envie moedas para um endereço BOLT</translation>
+        <source>Send coins to a Bolt address</source>
+        <translation>Envie moedas para um endereço Bolt</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="241"/>
@@ -1134,13 +1139,13 @@ Endereço: %4</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="78"/>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Usar 2 Masternodes separados para fazer a mixagem de fundos até 1000 DASH</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 BOLT</source>
+        <translation>Usar 2 Masternodes separados para fazer a mixagem de fundos até 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="91"/>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Usar 8 Masternodes separados para fazer a mixagem de fundos até 1000 DASH</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 BOLT</source>
+        <translation>Usar 8 Masternodes separados para fazer a mixagem de fundos até 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="104"/>
@@ -1149,18 +1154,18 @@ Endereço: %4</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="117"/>
-        <source>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</source>
-        <translation>Esta é a opção mais rápida e custará em torno de ~0,025 DASH para anonimizar 1000 DASH</translation>
+        <source>This option is the quickest and will cost about ~0.025 BOLT to anonymize 1000 BOLT</source>
+        <translation>Esta é a opção mais rápida e custará em torno de ~0,025 BOLT para anonimizar 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="130"/>
-        <source>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</source>
-        <translation>Esta opção é moderadamente rápida e custará em torno de ~0,05 DASH para anonimizar 1000 DASH</translation>
+        <source>This option is moderately fast and will cost about 0.05 BOLT to anonymize 1000 BOLT</source>
+        <translation>Esta opção é moderadamente rápida e custará em torno de ~0,05 BOLT para anonimizar 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="156"/>
-        <source>0.1 DASH per 1000 DASH you anonymize.</source>
-        <translation>0,1 DASH por cada 1000 DASH que você anonimizar.</translation>
+        <source>0.1 BOLT per 1000 BOLT you anonymize.</source>
+        <translation>0,1 BOLT por cada 1000 BOLT que você anonimizar.</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="143"/>
@@ -1189,6 +1194,129 @@ Endereço: %4</translation>
         <source>Darksend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening BOLT&apos;s configuration screen.</source>
         <translation>O Darksend foi ajustado com sucesso para máximo (%1 e 16 rodadas). Você pode alterar esse ajuste a qualquer momento, abrindo a tela de configuração da BOLT.</translation>
     </message>
+</context>
+<context>
+    <name>BlockBrowser</name>
+    <message>
+        <location filename="../forms/blockbrowser.ui" line="72"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20px; font-weight:600; color:#000000;&quot;&gt;Block Explorer &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20px; font-weight:600; color:#000000;&quot;&gt;Explorador de Blocos &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../forms/blockbrowser.ui" line="115"/>
+        <source>Decode Transaction</source>
+        <translation>Decodificar Transação</translation>
+    </message>
+    <message>
+        <location filename="../forms/blockbrowser.ui" line="226"/>
+        <source>Jump to Block</source>
+        <translation>Pular para o Bloco</translation>
+    </message>
+</context>
+<context>
+    <name>MasternodeList</name>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="54"/>
+        <source>My Masternodes</source>
+        <translation>Meus Masternodes</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="78"/>
+        <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your masternode should be running but you still do not see &quot;ENABLED&quot; in &quot;Status&quot; field.</source>
+        <translation>Nota: O Status dos seus masternodes em carteiras locais podem estar um pouco atrasados.&lt;br /&gt;Sempre aguarde sua carteira sincronizar todos os dados dos nodes&lt;br /&gt;para verificar que seu masternode esteja funcionando corretamente, então verá um &quot;ENABLED&quot; no campo &quot;Status&quot;.</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="104"/>
+        <source>Alias</source>
+        <translation>Pseudônimo</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="109"/>
+        <source>Address</source>
+        <translation>Endereço</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="114"/>
+        <source>Protocol</source>
+        <translation>Protocolo</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="124"/>
+        <source>Active</source>
+        <translation>Ativo</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="129"/>
+        <source>Last Seen</source>
+        <translation>Última vez visto</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="134"/>
+        <source>Payee</source>
+        <translation>Beneficiário</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="148"/>
+        <source>S&amp;tart alias</source>
+        <translation>I&amp;niciar psudônimo</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="154"/>
+        <source>Start &amp;all</source>
+        <translation>Iniciar &amp;todos</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="161"/>
+        <source>Start &amp;MISSING</source>
+        <translation>Iniciar &amp;PERDIDOS</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="168"/>
+        <source>&amp;Update status</source>
+        <translation>&amp;Atualizar status</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="175"/>
+        <source>Status will be updated automatically in (sec):</source>
+        <translation>Status serão atualizados automaticamente em (seg):</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="202"/>
+        <source>Autostart MISSING</source>
+        <translation>Iniciar automaticamente PERDIDOS</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="202"/>
+        <source>Autostart MISSING</source>
+        <translation>Iniciar automaticamente PERDIDOS</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="214"/>
+        <source>All Masternodes</source>
+        <translation>Todos Masternodes</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="202"/>
+        <source>Filter List:</source>
+        <translation>Filtrar Lista:</translation>
+    </message>
+
+    <message>
+        <location filename="../forms/masternodelist.ui" line="202"/>
+        <source>Filter masternode list</source>
+        <translation>Filtrar lista de Masternodes</translation>
+    </message>
+    <message>
+        <location filename="../forms/masternodelist.ui" line="202"/>
+        <source>Node Count:</source>
+        <translation>Quantidade de Nodes:</translation>
+    </message>
+    
 </context>
 <context>
     <name>EditAddressDialog</name>
@@ -1807,7 +1935,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="349"/>
-        <source>0 DASH</source>
+        <source>0 BOLT</source>
         <translation>0 BOLT</translation>
     </message>
     <message>
@@ -1817,7 +1945,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="363"/>
-        <source>0 DASH / 0 Rounds</source>
+        <source>0 BOLT / 0 Rounds</source>
         <translation>0 BOLT / 0 Voltas</translation>
     </message>
     <message>
@@ -1949,14 +2077,14 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     <message>
         <location filename="../overviewpage.cpp" line="393"/>
         <source>Submitted following entries to masternode:</source>
-        <translation type="unfinished"/>
+        <translation>Enviou as seguintes entradas para masternode:</translation>
     </message>
     <message>
         <location filename="../overviewpage.cpp" line="394"/>
         <location filename="../overviewpage.cpp" line="395"/>
         <location filename="../overviewpage.cpp" line="396"/>
         <source>Submitted to masternode, Waiting for more entries</source>
-        <translation type="unfinished"/>
+        <translation>Enviado para Masternode, Aguardando para mais acessos</translation>
     </message>
     <message>
         <location filename="../overviewpage.cpp" line="399"/>
@@ -2175,7 +2303,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="101"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -2924,8 +3052,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="54"/>
-        <source>The address to send the payment to (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>O endereço para enviar pagamento para (ex: ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>O endereço para enviar pagamento para (ex: BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="61"/>
@@ -3041,7 +3169,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="48"/>
-        <source>The address to sign the message with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>The address to sign the message with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3114,7 +3242,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="258"/>
-        <source>The address the message was signed with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>The address the message was signed with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3139,7 +3267,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="31"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -3535,6 +3663,10 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
         <translation>Confirmando (%1 de %2 confirmações recomendadas)</translation>
     </message>
     <message>
+        <source>Most Common</source>
+        <translation>Mais Comum</translation>
+    </message>
+    <message>
         <location filename="../transactiontablemodel.cpp" line="300"/>
         <source>Confirmed (%1 confirmations)</source>
         <translation>Confirmado (%1 confirmações)</translation>
@@ -3590,34 +3722,32 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
         <translation>Minerado</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="368"/>
         <source>Darksend Denominate</source>
-        <translation type="unfinished"/>
+        <translation>Denominação Darksend</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="370"/>
         <source>Darksend Collateral Payment</source>
-        <translation type="unfinished"/>
+        <translation>Pagamento Colateral Darksend</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="372"/>
         <source>Darksend Make Collateral Inputs</source>
-        <translation type="unfinished"/>
+        <translation>Darksend Fazer Entradas Colaterais</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="374"/>
         <source>Darksend Create Denominations</source>
-        <translation type="unfinished"/>
+        <translation>Darksend Criar Denominações</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="376"/>
         <source>Darksent</source>
-        <translation type="unfinished"/>
+        <translation>Darksent</translation>
     </message>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="418"/>
+        <source>watch-only</source>
+        <translation>somente de visualização</translation>
+    </message>
+    <message>
         <source>(n/a)</source>
-        <translation>(n/a)</translation>
+        <translation>(n/d)</translation>
     </message>
     <message>
         <location filename="../transactiontablemodel.cpp" line="610"/>
@@ -3867,7 +3997,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     </message>
     <message numerus="yes">
         <location filename="../walletmodel.cpp" line="271"/>
-        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n DASH.</source>
+        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n BOLT.</source>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
 </context>
@@ -4128,7 +4258,7 @@ for example: alertnotify=echo %%s | mail -s &quot;BOLT Alert&quot; admin@foo.com
     </message>
     <message>
         <location filename="../boltstrings.cpp" line="138"/>
-        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 DASH.</source>
+        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 BOLT.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -4553,11 +4683,6 @@ If the file does not exist, create it with owner-readable-only file permissions.
         <source>Ignore masternodes less than version (example: 70050; default : 0)</source>
         <translation type="unfinished"/>
     </message>
-
-    
-
-
-
     <message>
         <location filename="../boltstrings.cpp" line="247"/>
         <source>Importing...</source>
@@ -5279,3 +5404,5 @@ If the file does not exist, create it with owner-readable-only file permissions.
     </message>
 </context>
 </TS>
+
+

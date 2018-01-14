@@ -17,6 +17,7 @@ class TransactionView;
 class WalletModel;
 class MasternodeList;
 class LoggerPage;
+class BlockBrowser;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -63,6 +64,7 @@ private:
     QWidget *transactionsPage;
     ReceiveCoinsDialog *receiveCoinsPage;
     SendCoinsDialog *sendCoinsPage;
+    BlockBrowser *blockBrowser;
 
     TransactionView *transactionView;
 
@@ -72,6 +74,9 @@ private:
 public slots:
     /** Switch to logger Page */
     void gotoLoggerPage();
+
+    void gotoBlockBrowser();
+
     /** Switch to master node list Page */
     void gotomasternodeList();
     /** Switch to overview (home) page */
@@ -115,7 +120,7 @@ public slots:
     /** Show progress dialog e.g. for rescan */
     void showProgress(const QString &title, int nProgress);
     
-    /** Update selected CHAINCOIN amount from transactionview */
+    /** Update selected BOLT amount from transactionview */
     void trxAmount(QString amount);
 
 signals:

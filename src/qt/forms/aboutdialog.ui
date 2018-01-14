@@ -113,8 +113,7 @@
        </property>
        <property name="text">
         <string>Copyright &amp;copy; 2009-2014 The Bitcoin Core developers.
-Copyright &amp;copy; 2014-YYYY The Dash Core developers.
-Copyright &amp;copy; 2014-YYYY The BOLT Core developers.</string>
+Copyright &amp;copy; 2017-YYYY The Bolt Core developers.</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>

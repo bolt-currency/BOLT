@@ -15,6 +15,8 @@
 #include "optionsmodel.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
+#include "blockbrowser.h"
+
 #ifdef ENABLE_WALLET
 #include "walletframe.h"
 #include "walletmodel.h"
@@ -76,7 +78,8 @@ BitcoinGUI::BitcoinGUI(bool fIsTestnet, QWidget *parent) :
 
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
-    QString windowTitle = tr("BOLT Core") + " - ";
+
+    QString windowTitle = tr("Bolt Core") + " - ";
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
     bool enableWallet = !GetBoolArg("-disablewallet", false);
@@ -239,7 +242,7 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a BOLT address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a Bolt address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
 #ifdef Q_OS_MAC
@@ -275,12 +278,23 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     masternodeList->setStatusTip(tr("Masternodes"));
     masternodeList->setToolTip(masternodeList->statusTip());
     masternodeList->setCheckable(true);
+
 #ifdef Q_OS_MAC
     masternodeList->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_5));
 #else
     masternodeList->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
 #endif
     tabGroup->addAction(masternodeList);
+
+
+/* Block Explorer */
+
+blockAction = new QAction(QIcon(":/icons/masternode"), tr("&Block Explorer"), this);
+blockAction->setToolTip(tr("Explore the BlockChain"));
+blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
+blockAction->setCheckable(true);
+tabGroup->addAction(blockAction);
+
 #if !defined(Q_OS_MAC)
 #if !defined(Q_OS_WIN)
     openLoggerAction = new QAction(QIcon(":/icons/history"), tr("&Logger"), this);
@@ -307,6 +321,8 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
     connect(masternodeList, SIGNAL(triggered()), this, SLOT(gotomasternodeList()));
+    connect(blockAction, SIGNAL(triggered()), this, SLOT(gotoBlockBrowser()));
+
     #if !defined(Q_OS_MAC)
     #if !defined(Q_OS_WIN)
     connect(openLoggerAction, SIGNAL(triggered()), this, SLOT(gotoLoggerPage()));
@@ -318,10 +334,10 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
     if (!fIsTestnet)
-        aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About BOLT Core"), this);
+        aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About Bolt Core"), this);
     else
-        aboutAction = new QAction(QIcon(":/icons/bitcoin_testnet"), tr("&About BOLT Core"), this);
-    aboutAction->setStatusTip(tr("Show information about BOLT"));
+        aboutAction = new QAction(QIcon(":/icons/bitcoin_testnet"), tr("&About Bolt Core"), this);
+    aboutAction->setStatusTip(tr("Show information about Bolt"));
     aboutAction->setMenuRole(QAction::AboutRole);
 #if QT_VERSION < 0x050000
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
@@ -331,7 +347,7 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     aboutQtAction->setStatusTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setStatusTip(tr("Modify configuration options for BOLT"));
+    optionsAction->setStatusTip(tr("Modify configuration options for Bolt"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     if (!fIsTestnet)
         toggleHideAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Show / Hide"), this);
@@ -350,9 +366,9 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     unlockWalletAction->setToolTip(tr("Unlock wallet"));
     lockWalletAction = new QAction(tr("&Lock Wallet"), this);
     signMessageAction = new QAction(QIcon(":/icons/sign"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your BOLT addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your Bolt addresses to prove you own them"));
     verifyMessageAction = new QAction(QIcon(":/icons/verify"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified BOLT addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Bolt addresses"));
 
     openInfoAction = new QAction(QIcon(":/icons/info"), tr("&Information"), this);
     openInfoAction->setStatusTip(tr("Show diagnostic information"));
@@ -374,7 +390,7 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     openAction->setStatusTip(tr("Open a bolt: URI or payment request"));
 
     showHelpMessageAction = new QAction(QIcon(":/icons/info"), tr("&Command-line options"), this);
-    showHelpMessageAction->setStatusTip(tr("Show the BOLT Core help message to get a list with possible BOLT command-line options"));
+    showHelpMessageAction->setStatusTip(tr("Show the Bolt Core help message to get a list with possible Bolt command-line options"));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -456,6 +472,8 @@ void BitcoinGUI::createMenuBar()
 
 void BitcoinGUI::createToolBars()
 {
+
+    
     if(walletFrame)
     {
         QToolBar *toolbar = new QToolBar(tr("Tabs toolbar"));
@@ -465,6 +483,8 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
         toolbar->addAction(masternodeList);
+        toolbar->addAction(blockAction);
+        
         #if !defined(Q_OS_MAC)
         #if !defined(Q_OS_WIN)
         toolbar->addAction(openLoggerAction);
@@ -544,6 +564,7 @@ void BitcoinGUI::removeAllWallets()
 void BitcoinGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
+    blockAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     historyAction->setEnabled(enabled);
@@ -569,12 +590,12 @@ void BitcoinGUI::createTrayIcon(bool fIsTestnet)
 
     if (!fIsTestnet)
     {
-        trayIcon->setToolTip(tr("BOLT client"));
+        trayIcon->setToolTip(tr("Bolt client"));
         trayIcon->setIcon(QIcon(":/icons/toolbar"));
     }
     else
     {
-        trayIcon->setToolTip(tr("BOLT client") + " " + tr("[testnet]"));
+        trayIcon->setToolTip(tr("Bolt client") + " " + tr("[testnet]"));
         trayIcon->setIcon(QIcon(":/icons/toolbar_testnet"));
     }
 
@@ -689,6 +710,13 @@ void BitcoinGUI::gotomasternodeList()
     if (walletFrame) walletFrame->gotomasternodeList();
 }
 
+void BitcoinGUI::gotoBlockBrowser()
+{
+    blockAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoBlockBrowser();
+}
+
+
 void BitcoinGUI::gotoOverviewPage()
 {
     overviewAction->setChecked(true);
@@ -736,7 +764,7 @@ void BitcoinGUI::setNumConnections(int count)
     default: icon = ":/icons/connect_4"; break;
     }
     labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to BOLT network", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Bolt network", "", count));
 }
 
 void BitcoinGUI::setNumBlocks(int count)
@@ -851,7 +879,7 @@ void BitcoinGUI::setNumBlocks(int count)
 
 void BitcoinGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("BOLT"); // default title
+    QString strTitle = tr("Bolt"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -877,7 +905,7 @@ void BitcoinGUI::message(const QString &title, const QString &message, unsigned 
             break;
         }
     }
-    // Append title to "BOLT - "
+    // Append title to "Bolt - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 

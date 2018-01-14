@@ -277,8 +277,8 @@ Este producto incluye software desarrollado por OpenSSL Project para su uso en e
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="113"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</source>
-        <translation>Advertencia: Si cifra la cartera y pierde su contraseña, ¡&lt;b&gt;PERDERÁ TODOS SUS DASH&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BOLT&lt;/b&gt;!</source>
+        <translation>Advertencia: Si cifra la cartera y pierde su contraseña, ¡&lt;b&gt;PERDERÁ TODOS SUS BOLT&lt;/b&gt;!</translation>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="113"/>
@@ -1137,13 +1137,13 @@ Dirección: %4
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="78"/>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Usar 2 masternodes diferentes para mezclar fondos hasta 1000 DASH</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 BOLT</source>
+        <translation>Usar 2 masternodes diferentes para mezclar fondos hasta 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="91"/>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Usar 8 masternodes diferentes para mezclar fondos hasta 1000 DASH</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 BOLT</source>
+        <translation>Usar 8 masternodes diferentes para mezclar fondos hasta 1000 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="104"/>
@@ -1152,18 +1152,18 @@ Dirección: %4
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="117"/>
-        <source>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</source>
-        <translation>Esta es la opción más rápida y anonimizar 1000 DASH costará alrededor de 0.025 DASH</translation>
+        <source>This option is the quickest and will cost about ~0.025 BOLT to anonymize 1000 BOLT</source>
+        <translation>Esta es la opción más rápida y anonimizar 1000 BOLT costará alrededor de 0.025 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="130"/>
-        <source>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</source>
-        <translation>Esta opción es moderadamente rápida y anonimizar 1000 DASH costará alrededor de 0.05 DASH</translation>
+        <source>This option is moderately fast and will cost about 0.05 BOLT to anonymize 1000 BOLT</source>
+        <translation>Esta opción es moderadamente rápida y anonimizar 1000 BOLT costará alrededor de 0.05 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="156"/>
-        <source>0.1 DASH per 1000 DASH you anonymize.</source>
-        <translation>0.1 DASH por cada 1000 DASH que anonimice.</translation>
+        <source>0.1 BOLT per 1000 BOLT you anonymize.</source>
+        <translation>0.1 BOLT por cada 1000 BOLT que anonimice.</translation>
     </message>
     <message>
         <location filename="../forms/darksendconfig.ui" line="143"/>
@@ -1811,8 +1811,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="349"/>
-        <source>0 DASH</source>
-        <translation>0 DASH</translation>
+        <source>0 BOLT</source>
+        <translation>0 BOLT</translation>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="356"/>
@@ -1821,8 +1821,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="363"/>
-        <source>0 DASH / 0 Rounds</source>
-        <translation>0 DASH / 0 Rondas</translation>
+        <source>0 BOLT / 0 Rounds</source>
+        <translation>0 BOLT / 0 Rondas</translation>
     </message>
     <message>
         <location filename="../forms/overviewpage.ui" line="370"/>
@@ -2180,8 +2180,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="101"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>Introduzca una dirección BOLT (p.ej. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>Introduzca una dirección BOLT (p.ej. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
 </context>
 <context>
@@ -2929,8 +2929,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="54"/>
-        <source>The address to send the payment to (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>La dirección a la que enviar el pago (p.ej. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>La dirección a la que enviar el pago (p.ej. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="61"/>
@@ -3046,8 +3046,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="48"/>
-        <source>The address to sign the message with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>La dirección con la que firmar el mensaje (p.ej. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>The address to sign the message with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>La dirección con la que firmar el mensaje (p.ej. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="55"/>
@@ -3119,8 +3119,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="258"/>
-        <source>The address the message was signed with (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>La dirección con la que se firmó el mensaje (p.ej. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>The address the message was signed with (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>La dirección con la que se firmó el mensaje (p.ej. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="295"/>
@@ -3144,8 +3144,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="31"/>
-        <source>Enter a BOLT address (e.g. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>Introduzca una dirección BOLT (p.ej. ZNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
+        <translation>Introduzca una dirección BOLT (p.ej. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="114"/>
@@ -3872,8 +3872,8 @@ https://www.transifex.com/projects/p/Bolt Wallet/</translation>
     </message>
     <message numerus="yes">
         <location filename="../walletmodel.cpp" line="271"/>
-        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n DASH.</source>
-        <translation><numerusform>InstantX aún no soporta el envío de valores tan elevados. Las transacciones están limitadas actualmente a %n DASH.</numerusform><numerusform>InstantX aún no soporta el envío de valores tan elevados. Las transacciones están limitadas actualmente a %n DASH.</numerusform></translation>
+        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %n BOLT.</source>
+        <translation><numerusform>InstantX aún no soporta el envío de valores tan elevados. Las transacciones están limitadas actualmente a %n BOLT.</numerusform><numerusform>InstantX aún no soporta el envío de valores tan elevados. Las transacciones están limitadas actualmente a %n BOLT.</numerusform></translation>
     </message>
 </context>
 <context>
@@ -4143,8 +4143,8 @@ Por ejemplo: alertnotify=echo %%s | mail -s &quot;BOLT Alert&quot; admin@foo.com
     </message>
     <message>
         <location filename="../boltstrings.cpp" line="138"/>
-        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 DASH.</source>
-        <translation>No se pueden localizar fondos no denominados de Darksend suficientes para esta transacción que no sean iguales a 1000 DASH.</translation>
+        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 BOLT.</source>
+        <translation>No se pueden localizar fondos no denominados de Darksend suficientes para esta transacción que no sean iguales a 1000 BOLT.</translation>
     </message>
     <message>
         <location filename="../boltstrings.cpp" line="141"/>

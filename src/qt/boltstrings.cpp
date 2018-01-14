@@ -137,7 +137,7 @@ QT_TRANSLATE_NOOP("bolt-core", ""
 "Unable to locate enough Darksend denominated funds for this transaction."),
 QT_TRANSLATE_NOOP("bolt-core", ""
 "Unable to locate enough Darksend non-denominated funds for this transaction "
-"that are not equal 1000 CHAINCOIN."),
+"that are not equal 1000 BOLT."),
 QT_TRANSLATE_NOOP("bolt-core", ""
 "Unable to locate enough Darksend non-denominated funds for this transaction."),
 QT_TRANSLATE_NOOP("bolt-core", ""
@@ -387,4 +387,5 @@ QT_TRANSLATE_NOOP("bolt-core", "Zapping all transactions from wallet..."),
 QT_TRANSLATE_NOOP("bolt-core", "on startup"),
 QT_TRANSLATE_NOOP("bolt-core", "version"),
 QT_TRANSLATE_NOOP("bolt-core", "wallet.dat corrupt, salvage failed"),
+QT_TRANSLATE_NOOP("bolt-core", "My Masternodes"),
 };

@@ -476,7 +476,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(dash);
+    Q_INIT_RESOURCE(bolt);
 
     GUIUtil::SubstituteFonts();
 

@@ -19,6 +19,7 @@ class RPCConsole;
 class SendCoinsRecipient;
 class WalletFrame;
 class WalletModel;
+class BlockBrowser;
 
 class CWallet;
 
@@ -102,6 +103,9 @@ private:
     QAction *showHelpMessageAction;
     QAction *masternodeList;
     QAction *openLoggerAction;
+    QAction *blockAction;
+    
+    BlockBrowser *blockBrowser;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -176,6 +180,9 @@ private slots:
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
     void gotoSendCoinsPage(QString addr = "");
+
+    /** Switch to block explorer*/
+    void gotoBlockBrowser();
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");

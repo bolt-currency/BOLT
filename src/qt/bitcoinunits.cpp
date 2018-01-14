@@ -16,9 +16,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(CHAINCOIN);
-    unitlist.append(mCHAINCOIN);
-    unitlist.append(uCHAINCOIN);
+    unitlist.append(BOLT);
+    unitlist.append(mBOLT);
+    unitlist.append(uBOLT);
     unitlist.append(chuffs);
     return unitlist;
 }
@@ -27,9 +27,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case CHAINCOIN:
-    case mCHAINCOIN:
-    case uCHAINCOIN:
+    case BOLT:
+    case mBOLT:
+    case uBOLT:
     case chuffs:
         return true;
     default:
@@ -43,9 +43,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case CHAINCOIN: return QString("BOLT");
-            case mCHAINCOIN: return QString("mBOLT");
-            case uCHAINCOIN: return QString::fromUtf8("μBOLT");
+            case BOLT: return QString("BOLT");
+            case mBOLT: return QString("mBOLT");
+            case uBOLT: return QString::fromUtf8("μBOLT");
             case chuffs: return QString::fromUtf8("chuffs");
             default: return QString("???");
         }
@@ -54,9 +54,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case CHAINCOIN: return QString("tBOLT");
-            case mCHAINCOIN: return QString("mtBOLT");
-            case uCHAINCOIN: return QString::fromUtf8("μtBOLT");
+            case BOLT: return QString("tBOLT");
+            case mBOLT: return QString("mtBOLT");
+            case uBOLT: return QString::fromUtf8("μtBOLT");
             case chuffs: return QString::fromUtf8("tchuffs");
             default: return QString("???");
         }
@@ -69,9 +69,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case CHAINCOIN: return QString("BOLT");
-            case mCHAINCOIN: return QString("Milli-BOLT (1 / 1,000)");
-            case uCHAINCOIN: return QString("Micro-BOLT (1 / 1,000,000)");
+            case BOLT: return QString("BOLT");
+            case mBOLT: return QString("Milli-BOLT (1 / 1,000)");
+            case uBOLT: return QString("Micro-BOLT (1 / 1,000,000)");
             case chuffs: return QString("Ten Nano-BOLT (1 / 100,000,000)");
             default: return QString("???");
         }
@@ -80,9 +80,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case CHAINCOIN: return QString("TestBOLTs");
-            case mCHAINCOIN: return QString("Milli-TestBOLT (1 / 1,000)");
-            case uCHAINCOIN: return QString("Micro-TestBOLT (1 / 1,000,000)");
+            case BOLT: return QString("TestBOLTs");
+            case mBOLT: return QString("Milli-TestBOLT (1 / 1,000)");
+            case uBOLT: return QString("Micro-TestBOLT (1 / 1,000,000)");
             case chuffs: return QString("Ten Nano-TestBOLT (1 / 100,000,000)");
             default: return QString("???");
         }
@@ -93,9 +93,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case CHAINCOIN:  return 100000000;
-    case mCHAINCOIN: return 100000;
-    case uCHAINCOIN: return 100;
+    case BOLT:  return 100000000;
+    case mBOLT: return 100000;
+    case uBOLT: return 100;
     case chuffs: return 1;
     default:   return 100000000;
     }
@@ -105,9 +105,9 @@ qint64 BitcoinUnits::maxAmount(int unit)
 {
     switch(unit)
     {
-    case CHAINCOIN:  return Q_INT64_C(21000000);
-    case mCHAINCOIN: return Q_INT64_C(21000000000);
-    case uCHAINCOIN: return Q_INT64_C(21000000000000);
+    case BOLT:  return Q_INT64_C(21000000);
+    case mBOLT: return Q_INT64_C(21000000000);
+    case uBOLT: return Q_INT64_C(21000000000000);
     case chuffs: return Q_INT64_C(2100000000000000);
     default:   return 0;
     }
@@ -117,9 +117,9 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case CHAINCOIN: return 8; // 21,000,000 (# digits, without commas)
-    case mCHAINCOIN: return 11; // 21,000,000,000
-    case uCHAINCOIN: return 14; // 21,000,000,000,000
+    case BOLT: return 8; // 21,000,000 (# digits, without commas)
+    case mBOLT: return 11; // 21,000,000,000
+    case uBOLT: return 14; // 21,000,000,000,000
     case chuffs: return 16; // 2,100,000,000,000,000
     default: return 0;
     }
@@ -129,9 +129,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case CHAINCOIN: return 8;
-    case mCHAINCOIN: return 5;
-    case uCHAINCOIN: return 2;
+    case BOLT: return 8;
+    case mBOLT: return 5;
+    case uBOLT: return 2;
     case chuffs: return 0;
     default: return 0;
     }

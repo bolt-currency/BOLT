@@ -44,6 +44,7 @@ QT_TS = \
 QT_FORMS_UI = \
   forms/aboutdialog.ui \
   forms/addressbookpage.ui \
+  forms/blockbrowser.ui \
   forms/askpassphrasedialog.ui \
   forms/coincontroldialog.ui \
   forms/darksendconfig.ui \
@@ -65,6 +66,7 @@ QT_FORMS_UI = \
 QT_MOC_CPP = \
   moc_addressbookpage.cpp \
   moc_addresstablemodel.cpp \
+  moc_blockbrowser.cpp \
   moc_askpassphrasedialog.cpp \
   moc_bitcoinaddressvalidator.cpp \
   moc_bitcoinamountfield.cpp \
@@ -265,6 +267,7 @@ BITCOIN_QT_CPP = \
 if ENABLE_WALLET
 BITCOIN_QT_CPP += \
   addressbookpage.cpp \
+  blockbrowser.cpp \
   addresstablemodel.cpp \
   askpassphrasedialog.cpp \
   coincontroldialog.cpp \
@@ -315,7 +318,7 @@ RES_CSS = \
   
 RES_MOVIES = $(wildcard res/movies/spinner-*.png)
 
-CHAINCOIN_RC = res/bolt-qt-res.rc
+BOLT_RC = res/bolt-qt-res.rc
 
 libboltqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(QT_INCLUDES) \
   -I$(top_srcdir)/src/qt/forms $(QT_DBUS_INCLUDES)
@@ -340,7 +343,7 @@ if TARGET_DARWIN
   bolt_qt_SOURCES += $(BITCOIN_MM)
 endif
 if TARGET_WINDOWS
-  bolt_qt_SOURCES += $(CHAINCOIN_RC)
+  bolt_qt_SOURCES += $(BOLT_RC)
 endif
 bolt_qt_LDADD = libboltqt.a $(LIBBITCOIN_SERVER)
 if ENABLE_WALLET
@@ -367,7 +370,7 @@ translate: boltstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BIT
 	@QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts locale/bolt_en.ts
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_QM) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_CSS) $(PROTOBUF_H)
-	@cd $(abs_srcdir); test -f $(RCC) && QT_SELECT=$(QT_SELECT) $(RCC) -name dash -o $(abs_builddir)/$@ $< || \
+	@cd $(abs_srcdir); test -f $(RCC) && QT_SELECT=$(QT_SELECT) $(RCC) -name bolt -o $(abs_builddir)/$@ $< || \
 	  echo error: could not build $@
 	$(SED) -e '/^\*\*.*Created:/d' $@ > $@.n && mv $@{.n,}
 	$(SED) -e '/^\*\*.*by:/d' $@  > $@.n && mv $@{.n,}
