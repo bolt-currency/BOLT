@@ -199,6 +199,21 @@ bool CCryptoKeyStore::SetCrypted()
     return true;
 }
 
+
+bool CCryptoKeyStore::LockKeyStore()
+{
+    if (!SetCrypted())
+        return false;
+
+    {
+        LOCK(cs_KeyStore);
+        vMasterKey.clear();
+    }
+
+    NotifyStatusChanged(this);
+    return true;
+}
+
 bool CCryptoKeyStore::Lock()
 {
     if (!SetCrypted())

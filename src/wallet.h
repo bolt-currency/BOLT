@@ -14,6 +14,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "walletdb.h"
+#include "private.h"
 
 #include <algorithm>
 #include <map>
@@ -39,6 +40,9 @@ class COutput;
 class CReserveKey;
 class CScript;
 class CWalletTx;
+
+typedef std::map<CKeyID, CPrivateKeyMetadata> PrivateKeyMetaMap;
+typedef std::map<std::string, std::string> mapValue_t;
 
 /** (client) version numbers for particular wallet features */
 enum WalletFeature
@@ -144,12 +148,28 @@ public:
     bool SelectCoinsWithoutDenomination(int64_t nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, int64_t& nValueRet) const;
     bool GetTransaction(const uint256 &hashTx, CWalletTx& wtx);
 
+    bool NewPrivateAddress(std::string& sError, std::string& sLabel, CPrivateAddress& sxAddr);
+    bool AddPrivateAddress(CPrivateAddress& sxAddr);
+    bool UnlockPrivateAddresses(const CKeyingMaterial& vMasterKeyIn);
+    bool UpdatePrivateAddress(std::string &addr, std::string &label, bool addIfNotExist);
+
+    bool CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, std::vector<uint8_t>& narr, std::string& sNarr, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl=NULL);
+    std::string SendPrivateMoney(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, std::vector<uint8_t>& narr, std::string& sNarr, CWalletTx& wtxNew, bool fAskFee=false);
+    bool SendPrivateMoneyToDestination(CPrivateAddress& sxAddress, int64_t nValue, std::string& sNarr, CWalletTx& wtxNew, std::string& sError, bool fAskFee=false);
+    bool FindPrivateTransactions(const CTransaction& tx, mapValue_t& mapNarr);
+
+
+    std::set<CPrivateAddress> privateAddresses;
+    PrivateKeyMetaMap mapPrivateKeyMeta;
+    uint32_t nPrivate, nFoundPrivate; // for reporting, zero before use
+
     /// Main wallet lock.
     /// This lock protects all the fields added by CWallet
     ///   except for:
     ///      fFileBacked (immutable after instantiation)
     ///      strWalletFile (immutable after instantiation)
     mutable CCriticalSection cs_wallet;
+    bool Lock();
 
     bool fFileBacked;
     bool fWalletUnlockAnonymizeOnly;
@@ -284,9 +304,12 @@ public:
     bool CreateTransaction(const std::vector<std::pair<CScript, int64_t> >& vecSend,
                            CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string& strFailReason, const CCoinControl *coinControl = NULL, AvailableCoinsType coin_type=ALL_COINS, bool useIX=false);
 
-    bool CreateTransaction(CScript scriptPubKey, int64_t nValue,
+    /*bool CreateTransaction(CScript scriptPubKey, int64_t nValue,
                            CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string& strFailReason, const CCoinControl *coinControl = NULL);
+    bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand="tx");*/
+    bool CreateTransaction(CScript scriptPubKey, int64_t nValue, std::string& sNarr, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl *coinControl=NULL);
     bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand="tx");
+    
     std::string SendMoney(CScript scriptPubKey, int64_t nValue, CWalletTx& wtxNew, AvailableCoinsType coin_type=ALL_COINS);
     std::string SendMoneyToDestination(const CTxDestination &address, int64_t nValue, CWalletTx& wtxNew, AvailableCoinsType coin_type=ALL_COINS);
     std::string PrepareDarksendDenominate(int minRounds, int maxRounds);
@@ -399,6 +422,10 @@ public:
     bool SetAddressBook(const CTxDestination& address, const std::string& strName, const std::string& purpose);
 
     bool DelAddressBook(const CTxDestination& address);
+
+    bool SetAddressBookName(const CTxDestination& address, const std::string& strName);
+
+    bool DelAddressBookName(const CTxDestination& address);
 
     bool UpdatedTransaction(const uint256 &hashTx);
 

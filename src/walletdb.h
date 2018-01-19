@@ -7,6 +7,7 @@
 
 #include "db.h"
 #include "key.h"
+#include "private.h"
 
 #include <list>
 #include <stdint.h>
@@ -67,6 +68,31 @@ public:
     }
 };
 
+
+class CPrivateKeyMetadata
+{
+// -- used to get secret for keys created by private transaction with wallet locked
+public:
+    CPrivateKeyMetadata() {};
+    
+    CPrivateKeyMetadata(CPubKey pkEphem_, CPubKey pkScan_)
+    {
+        pkEphem = pkEphem_;
+        pkScan = pkScan_;
+    };
+    
+    CPubKey pkEphem;
+    CPubKey pkScan;
+
+    IMPLEMENT_SERIALIZE
+    (
+        READWRITE(pkEphem);
+        READWRITE(pkScan);
+    )
+
+};
+
+
 /** Access to the wallet database (wallet.dat) */
 class CWalletDB : public CDB
 {
@@ -92,6 +118,12 @@ public:
     bool WriteMasterKey(unsigned int nID, const CMasterKey& kMasterKey);
 
     bool WriteCScript(const uint160& hash, const CScript& redeemScript);
+
+    /**/
+    bool WritePrivateKeyMeta(const CKeyID& keyId, const CPrivateKeyMetadata& sxKeyMeta);
+    bool ErasePrivateKeyMeta(const CKeyID& keyId);
+    bool WritePrivateAddress(const CPrivateAddress& sxAddr);    
+    bool ReadPrivateAddress(CPrivateAddress& sxAddr);
 
     bool WriteBestBlock(const CBlockLocator& locator);
     bool ReadBestBlock(CBlockLocator& locator);
@@ -129,5 +161,7 @@ public:
 };
 
 bool BackupWallet(const CWallet& wallet, const std::string& strDest);
+
+
 
 #endif // BITCOIN_WALLETDB_H

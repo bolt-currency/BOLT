@@ -40,10 +40,16 @@ public:
 
 /** An encapsulated public key. */
 class CPubKey {
+
+        // CSecret is a serialization of just the secret parameter (32 bytes)
+typedef std::vector<unsigned char, secure_allocator<unsigned char> > CSecret;
+
+
 private:
     // Just store the serialized data.
     // Its length can very cheaply be computed from the first byte.
     unsigned char vch[65];
+    
 
     // Compute the length of a pubkey with a given first byte.
     unsigned int static GetLen(unsigned char chHeader) {
@@ -91,6 +97,7 @@ public:
     const unsigned char *begin() const { return vch; }
     const unsigned char *end() const { return vch+size(); }
     const unsigned char &operator[](unsigned int pos) const { return vch[pos]; }
+
 
     // Comparator implementation.
     friend bool operator==(const CPubKey &a, const CPubKey &b) {
@@ -168,6 +175,13 @@ public:
 
     // Derive BIP32 child pubkey.
     bool Derive(CPubKey& pubkeyChild, unsigned char ccChild[32], unsigned int nChild, const unsigned char cc[32]) const;
+
+    // Raw for private address
+    std::vector<unsigned char> Raw() const {
+    std::vector<unsigned char> r;
+        r.insert(r.end(), vch, vch+size());
+    return r;
+    }
 };
 
 

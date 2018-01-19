@@ -101,6 +101,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0xFE)(0x52)(0xF8); // BOLT BIP32 pubkeys start with 'drkv'
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0xFE)(0x52)(0xCC); // BOLT BIP32 prvkeys start with 'drkp'
         base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000005);             // BOLT BIP44 coin type is '5'
+        base58Prefixes[STEALTH_ADDRESS] = list_of(55);                    // BOLT private address start with 'P'
 
         // Convert the pnSeeds array into usable address objects.
         for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
@@ -154,13 +155,13 @@ public:
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1513776186;
-        genesis.nNonce = 0;
+        genesis.nNonce   = 3377645;
 
         hashGenesisBlock = genesis.GetHash();
 
-        //printf("merkle= %s\n", hashGenesisBlock.ToString().c_str());
-        //printf("merkle= %s \n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("765d41df2f38a3696dd9da201d4bfec36cddfe9e328c60c6cbe88727afa41fb9"));
+       /* printf("merkle= %s\n", hashGenesisBlock.ToString().c_str());
+        printf("merkle= %s \n", genesis.hashMerkleRoot.ToString().c_str()); */
+        assert(hashGenesisBlock == uint256("000005d877c418653d4730772ecfa8c4bda57c85d1328d0db861aa9b8bf1a084"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -171,6 +172,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x3a)(0x80)(0x61)(0xa0); // Testnet bolt BIP32 pubkeys start with 'DRKV'
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x3a)(0x80)(0x58)(0x37); // Testnet bolt BIP32 prvkeys start with 'DRKP'
         base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000001);             // Testnet bolt BIP44 coin type is '5' (All coin's testnet default)
+        base58Prefixes[STEALTH_ADDRESS] = list_of(117);                    // BOLT private address start with 'p'
     }
     virtual Network NetworkID() const { return CChainParams::TESTNET; }
 };
