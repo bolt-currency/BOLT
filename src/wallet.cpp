@@ -1,8 +1,24 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+/*
+ * Copyright (c) 2009 Satoshi Nakamoto
+ * Copyright (c) 2009-2014 The Bitcoin Developers
+ * Copyright (c) 2017-2018 The Bolt Developers
+ *
+ * This file is part of Bolt.
+ *
+ * Bolt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License with
+ * additional permissions to the one published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version. For more information see LICENSE.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "wallet.h"
 
@@ -1076,13 +1092,14 @@ void CWalletTx::RelayWalletTransaction(std::string strCommand)
             uint256 hash = GetHash();
             LogPrintf("Relaying wtx %s\n", hash.ToString());
 
-            if(strCommand == "txlreq"){
+             if(strCommand == "txlreq"){
+                LogPrintf("Relaying wtx locked %s\n", hash.ToString());
                 mapTxLockReq.insert(make_pair(hash, ((CTransaction)*this)));
                 CreateNewLock(((CTransaction)*this));
                 RelayTransactionLockReq(((CTransaction)*this), hash, true);
             } else {
                 RelayTransaction(((CTransaction)*this), hash);
-            }
+            } 
         }
     }
 }
@@ -1952,12 +1969,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend,
                         strFailReason = _("Transaction amount too small");
                         return false;
                     }
-                    // AQUI!!!!!
-                   /* if (txout.IsDust(CTransaction::nMinRelayTxFee))
-                    {
-                        strFailReason = _("Transaction amount too small");
-                        return false;
-                    } */
+
                     wtxNew.vout.push_back(txout);
                 }
 
@@ -2109,14 +2121,6 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend,
     return true;
 }
 
-/*bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue,
-                                CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl)
-{
-    vector< pair<CScript, int64_t> > vecSend;
-    vecSend.push_back(make_pair(scriptPubKey, nValue));
-    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
-} */
-
 
 bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::string& sNarr, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl)
 {
@@ -2142,7 +2146,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::strin
 
     int nChangePos;
     std::string strFailReason;
-    //bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePos, strFailReason, coinControl);
+
     bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
 
     if(!strFailReason.empty())
@@ -2199,6 +2203,7 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std:
             LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
             return false;
         }
+        LogPrintf("Before relay transaction %s\n", strCommand);
         wtxNew.RelayWalletTransaction(strCommand);
     }
     return true;
@@ -2229,6 +2234,9 @@ string CWallet::SendMoney(CScript scriptPubKey, int64_t nValue, CWalletTx& wtxNe
     CWalletTx wtx;
     std::vector<std::pair<CScript, int64_t> > vecSend;
     vecSend.push_back(make_pair(scriptPubKey, nValue));
+
+    //printf("Value: %" PRIu64 "\n", nValue);
+
     string strError = "";
 
     if (!CreateTransaction(vecSend, wtxNew, reservekey, nFeeRequired, strError, coinControl, coin_type))
@@ -3376,13 +3384,17 @@ bool CWallet::UpdatePrivateAddress(std::string &addr, std::string &label, bool a
 bool CWallet::CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, std::vector<uint8_t>& narr, std::string& sNarr, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl)
 {
     vector< pair<CScript, int64_t> > vecSend;
+
     vecSend.push_back(make_pair(scriptPubKey, nValue));
 
-    CScript scriptP = CScript() << OP_RETURN << P;
-    if (narr.size() > 0)
-        scriptP = scriptP << OP_RETURN << narr;
 
-    vecSend.push_back(make_pair(scriptP, 0));
+/*    if(P.size() > 0){
+        CScript scriptP = CScript() << OP_RETURN << P;
+        if (narr.size() > 0)
+            scriptP = scriptP << OP_RETURN << narr; 
+
+        vecSend.push_back(make_pair(scriptP, 0));
+    } */
 
     // -- shuffle inputs, change output won't mix enough as it must be not fully random for plantext narrations
     std::random_shuffle(vecSend.begin(), vecSend.end());
@@ -3390,9 +3402,6 @@ bool CWallet::CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std
     int nChangePos;
     std::string strFailReason;
 
-    /* PRECISA DE REVISÃO ATENÇÃO!! */ 
-    //bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePos, strFailReason, coinControl);
-     //bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePos, strFailReason, coinControl);
     bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
     
     if(!strFailReason.empty())
@@ -3416,7 +3425,7 @@ bool CWallet::CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std
             wtxNew.mapValue[key] = sNarr;
             break;
         };
-    };
+    }; 
 
     return rv;
 }
@@ -3432,22 +3441,9 @@ string CWallet::SendPrivateMoney(CScript scriptPubKey, int64_t nValue, std::vect
         LogPrintf("SendPrivateMoney() : %s\n", strError.c_str());
         return strError;
     }
-    /*if (fWalletUnlockStakingOnly)
-    {
-        string strError = _("Error: Wallet unlocked for staking only, unable to create transaction.");
-        LogPrintf("SendPrivateMoney() : %s\n", strError.c_str());
-        return strError;
-    } */
-    //CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
-
-
-    /*CWalletTx wtx;
-    std::vector<std::pair<CScript, int64_t> > vecSend;
-    vecSend.push_back(make_pair(scriptPubKey, nValue));
-    string strError = ""; */
 
     if (!CreatePrivateTransaction(scriptPubKey, nValue, P, narr, sNarr, wtxNew, reservekey, nFeeRequired))
-    //if(!CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl))
+    //if (!CreateTransaction(scriptPubKey, nValue, narr, sNarr, wtxNew, reservekey, nFeeRequired, NULL))
     {
         string strError;
         if (nValue + nFeeRequired > GetBalance())
@@ -3527,6 +3523,7 @@ bool CWallet::SendPrivateMoneyToDestination(CPrivateAddress& sxAddress, int64_t 
     };
 
     std::vector<unsigned char> vchNarr;
+
     if (sNarr.length() > 0)
     {
         /*SecMsgCrypter crypter;

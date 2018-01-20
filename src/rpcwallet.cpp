@@ -1,8 +1,24 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+/*
+ * Copyright (c) 2009 Satoshi Nakamoto
+ * Copyright (c) 2009-2014 The Bitcoin Developers
+ * Copyright (c) 2017-2018 The Bolt Developers
+ *
+ * This file is part of Bolt.
+ *
+ * Bolt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License with
+ * additional permissions to the one published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version. For more information see LICENSE.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "base58.h"
 #include "rpcserver.h"
@@ -347,6 +363,7 @@ Value sendtoaddress(const Array& params, bool fHelp)
         wtx.mapValue["to"]      = params[3].get_str();
 
     EnsureWalletIsUnlocked();
+
 
     string strError = pwalletMain->SendMoneyToDestination(address.Get(), nAmount, wtx);
     if (strError != "")
@@ -2216,10 +2233,6 @@ Value sendtoprivateaddress(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_WALLET_ERROR, sError);
 
     return wtx.GetHash().GetHex();
-
-    result.push_back(Pair("result", "Not implemented yet."));
-
-    return result;
 }
 
 // TODO
@@ -2381,3 +2394,104 @@ int getBlockTime(int Height)
     return result;
 }
 */
+
+
+static void SendInstantMoney(const CTxDestination &address, int64_t nValue, bool fSubtractFeeFromAmount, CWalletTx& wtxNew, bool useInstantX=false, bool fUsePrivateSend=false)
+{
+    CCoinControl *coinControl = NULL;
+    
+    int64_t curBalance = pwalletMain->GetBalance();
+
+    // Check amount
+    if (nValue <= 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
+
+     if (nValue > curBalance)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Insufficient funds");
+
+   /* if (pwalletMain->GetBroadcastTransactions() && !g_connman)
+        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled"); */
+    
+    EnsureWalletIsUnlocked();
+
+    // Parse BOLT address
+    CScript scriptPubKey;
+    scriptPubKey.SetDestination(address);
+
+    CReserveKey keyChange(pwalletMain);
+    int64_t nFeeRequired = 0;
+    string strFailReason;
+
+    std::vector<std::pair<CScript, int64_t> > vecSend;
+
+    // ****** Add fees ************ /
+    vecSend.push_back(make_pair(scriptPubKey, (nValue - fSubtractFeeFromAmount)));
+
+
+    bool fCreated = pwalletMain->CreateTransaction(vecSend, wtxNew, keyChange, nFeeRequired, strFailReason, coinControl, ALL_COINS, true);
+                                                   //NULL, ALL_COINS, fUseInstantSend);
+    if (!fCreated)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
+
+    if (!pwalletMain->CommitTransaction(wtxNew, keyChange, (useInstantX ? "txlreq" : "tx")))
+        throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.");
+
+}
+
+
+Value instantsendtoaddress(const Array& params, bool fHelp)
+{
+
+    
+    if (fHelp || params.size() < 2 || params.size() > 5)
+        throw runtime_error(
+            "instantsendtoaddress \"boltaddress\" amount ( \"comment\" \"comment-to\" subtractfeefromamount )\n"
+            "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n"
+            + HelpRequiringPassphrase() +
+            "\nArguments:\n"
+            "1. \"boltddress\"  (string, required) The bolt address to send to.\n"
+            "2. \"amount\"      (numeric, required) The amount in btc to send. eg 0.1\n"
+            "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
+            "                             This is not part of the transaction, just kept in your wallet.\n"
+            "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
+            "                             to which you're sending the transaction. This is not part of the \n"
+            "                             transaction, just kept in your wallet.\n"
+            "5. subtractfeefromamount  (boolean, optional, default=false) The fee will be deducted from the amount being sent.\n"
+            "                             The recipient will receive less amount of bolt than you enter in the amount field.\n"
+            "\nResult:\n"
+            "\"transactionid\"  (string) The transaction id.\n"
+            "\nExamples:\n"
+            + HelpExampleCli("instantsendtoaddress", "\"BnaTBfDXPLZUMU6v5qzNE3CKLqXJCRXu7K\" 0.1")
+            + HelpExampleCli("instantsendtoaddress", "\"BnaTBfDXPLZUMU6v5qzNE3CKLqXJCRXu7K\" 0.1 \"donation\" \"seans outpost\"")
+            + HelpExampleCli("instantsendtoaddress", "\"BnaTBfDXPLZUMU6v5qzNE3CKLqXJCRXu7K\" 0.1 \"\" \"\" true")
+            + HelpExampleRpc("instantsendtoaddress", "\"BnaTBfDXPLZUMU6v5qzNE3CKLqXJCRXu7K\", 0.1, \"donation\", \"seans outpost\"")
+        );
+
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
+    CBitcoinAddress address(params[0].get_str());
+    if (!address.IsValid())
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid bolt address");
+
+    // Amount
+    int64_t  nAmount = AmountFromValue(params[1]);
+    if (nAmount <= 0)
+        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
+
+    // Wallet comments
+    CWalletTx wtx;
+    if (params.size() > 2 && !params[2].is_null() && !params[2].get_str().empty())
+        wtx.mapValue["comment"] = params[2].get_str();
+    if (params.size() > 3 && !params[3].is_null() && !params[3].get_str().empty())
+        wtx.mapValue["to"]      = params[3].get_str();
+
+    bool fSubtractFeeFromAmount = false;
+    if (params.size() > 4)
+        fSubtractFeeFromAmount = params[4].get_bool();
+
+    EnsureWalletIsUnlocked();
+
+    SendInstantMoney(address.Get(), nAmount, fSubtractFeeFromAmount, wtx, true);
+
+    return wtx.GetHash().GetHex(); 
+}

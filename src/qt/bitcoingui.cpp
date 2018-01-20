@@ -289,7 +289,7 @@ void BitcoinGUI::createActions(bool fIsTestnet)
 
 /* Block Explorer */
 
-blockAction = new QAction(QIcon(":/icons/masternode"), tr("&Block Explorer"), this);
+blockAction = new QAction(QIcon(":/icons/explorer"), tr("&Block Explorer"), this);
 blockAction->setToolTip(tr("Explore the BlockChain"));
 blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
 blockAction->setCheckable(true);

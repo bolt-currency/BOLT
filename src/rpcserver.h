@@ -1,7 +1,24 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+/*
+ * Copyright (c) 2009 Satoshi Nakamoto
+ * Copyright (c) 2009-2014 The Bitcoin Developers
+ * Copyright (c) 2017-2018 The Bolt Developers
+ *
+ * This file is part of Bolt.
+ *
+ * Bolt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License with
+ * additional permissions to the one published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version. For more information see LICENSE.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef _BITCOINRPC_SERVER_H_
 #define _BITCOINRPC_SERVER_H_ 1
@@ -190,6 +207,7 @@ extern json_spirit::Value gettxoutsetinfo(const json_spirit::Array& params, bool
 extern json_spirit::Value gettxout(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value verifychain(const json_spirit::Array& params, bool fHelp);
 
+/* Private Send */
 extern json_spirit::Value getnewprivateaddress(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value listprivateaddresses(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value importprivateaddress(const json_spirit::Array& params, bool fHelp);
@@ -197,7 +215,10 @@ extern json_spirit::Value sendtoprivateaddress(const json_spirit::Array& params,
 /*extern json_spirit::Value scanforalltxns(const json_spirit::Array& params, bool fHelp); */
 /*extern json_spirit::Value scanforprivatetxns(const json_spirit::Array& params, bool fHelp);*/
 
+/* Instant Send */
+extern json_spirit::Value instantsendtoaddress(const json_spirit::Array& params, bool fHelp);
 
+/* Masternode */
 extern json_spirit::Value darksend(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value spork(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value masternode(const json_spirit::Array& params, bool fHelp);

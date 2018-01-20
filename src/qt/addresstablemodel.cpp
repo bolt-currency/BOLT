@@ -92,7 +92,7 @@ public:
                                   QString::fromStdString(address.ToString())));
             }
 
-            std::set<CPrivateAddress>::iterator it;
+           /* std::set<CPrivateAddress>::iterator it;
             for (it = wallet->privateAddresses.begin(); it != wallet->privateAddresses.end(); ++it)
             {
                 bool fMine = !(it->scan_secret.size() < 1);
@@ -100,7 +100,7 @@ public:
                                   QString::fromStdString(it->label),
                                   QString::fromStdString(it->Encoded()),
                                   true));
-            };
+            }; */
         }
         // qLowerBound() and qUpperBound() require our cachedAddressTable list to be sorted in asc order
         // Even though the map is already sorted this re-sorting step is needed because the originating map
@@ -253,6 +253,7 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
     std::string strPurpose = (rec->type == AddressTableEntry::Sending ? "send" : "receive");
     editStatus = OK;
 
+
     if(role == Qt::EditRole)
     {
         LOCK(wallet->cs_wallet); /* For SetAddressBook / DelAddressBook */
@@ -265,16 +266,6 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
                 editStatus = NO_CHANGES;
                 return false;
             }
-
-            /*strTemp = rec->address.toStdString();
-            if (IsPrivateAddress(strTemp))
-            {
-                strValue = value.toString().toStdString();
-                wallet->UpdatePrivateAddress(strTemp, strValue, false);
-            } else
-            {
-                wallet->SetAddressBookName(CTransfercoinAddress(strTemp).Get(), value.toString().toStdString());
-             */}
             
             wallet->SetAddressBook(curAddress, value.toString().toStdString(), strPurpose);
         } else if(index.column() == Address) {
@@ -286,11 +277,11 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
                 return false;
             }
             // Do nothing, if old address == new address
-            else if(newAddress == curAddress)
+           /* else if(newAddress == curAddress)
             {
                 editStatus = NO_CHANGES;
                 return false;
-            }
+            } */
             // Check for duplicate addresses to prevent accidental deletion of addresses, if you try
             // to paste an existing address over another address (with a different label)
             else if(wallet->mapAddressBook.count(newAddress))
@@ -301,6 +292,7 @@ bool AddressTableModel::setData(const QModelIndex &index, const QVariant &value,
             // Double-check that we're not overwriting a receiving address
             else if(rec->type == AddressTableEntry::Sending)
             {
+                CTxDestination curAddress = CBitcoinAddress(rec->address.toStdString()).Get();
                 // Remove old entry
                 wallet->DelAddressBook(curAddress);
                 // Add new entry with new address
