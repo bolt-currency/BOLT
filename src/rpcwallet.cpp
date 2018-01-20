@@ -344,9 +344,9 @@ Value sendtoaddress(const Array& params, bool fHelp)
             + HelpExampleRpc("sendtoaddress", "\"BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto\", 0.1, \"donation\", \"seans outpost\"")
         );
 
-    /*if (params[0].get_str().length() > 75
+    if (params[0].get_str().length() > 75
         && IsPrivateAddress(params[0].get_str()))
-        return sendtoprivateaddress(params, false); */
+        return sendtoprivateaddress(params, false); 
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
