@@ -74,6 +74,7 @@ public:
     data_chunk spend_secret;
     
     bool SetEncoded(const std::string& encodedAddress);
+    
     std::string Encoded() const;
 
     int SetScanPubKey(CPubKey pk);

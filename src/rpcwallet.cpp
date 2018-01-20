@@ -2353,8 +2353,6 @@ int getBlockTime(int Height)
     pwalletMain->nPrivate = 0;
     pwalletMain->nFoundPrivate = 0;
 
-
-/*
     while (pindex)
     {
         nBlocks++;

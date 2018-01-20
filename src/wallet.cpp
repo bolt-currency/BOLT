@@ -29,7 +29,7 @@
 #include "darksend.h"
 #include "keepass.h"
 #include "instantx.h"
-#include "smessage.h"
+#include "private.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <openssl/rand.h>
@@ -2518,7 +2518,7 @@ bool CWallet::DelAddressBook(const CTxDestination& address)
         }
         mapAddressBook.erase(address);
     }
-
+     
     NotifyAddressBookChanged(this, address, "", ::IsMine(*this, address), "", CT_DELETED);
 
     if (!fFileBacked)
@@ -3158,8 +3158,7 @@ bool CWallet::AddPrivateAddress(CPrivateAddress& sxAddr)
     bool rv = CWalletDB(strWalletFile).WritePrivateAddress(sxAddr);
 
     if (rv)
-        //
-        //NotifyAddressBookChanged(this, sxAddr, sxAddr.label, fOwned, CT_NEW);
+        NotifyAddressBookChanged(this, sxAddr, sxAddr.label, fOwned, "", CT_NEW);
 
     return rv;
 }
@@ -3375,8 +3374,8 @@ bool CWallet::UpdatePrivateAddress(std::string &addr, std::string &label, bool a
         return false;
     };
 
-    bool fOwned = sxFound.scan_secret.size() == ec_secret_size;
-    //NotifyAddressBookChanged(this, sxFound, sxFound.label, fOwned, nMode);
+    bool fOwned = sxFound.scan_secret.size() == ec_secret_size; 
+    NotifyAddressBookChanged(this, sxFound, sxFound.label, fOwned, "", nMode);
 
     return true;
 }
@@ -3552,40 +3551,6 @@ bool CWallet::SendPrivateMoneyToDestination(CPrivateAddress& sxAddress, int64_t 
 
     return true;
 }
-
-
-
-/*bool CWallet::SetAddressBookName(const CTxDestination& address, const string& strName)
-{
-    bool fUpdated = false;
-    {
-        LOCK(cs_wallet); // mapAddressBook
-        std::map<CTxDestination, std::string>::iterator mi = mapAddressBook.find(address);
-        fUpdated = mi != mapAddressBook.end();
-        mapAddressBook[address] = strName;
-    }
-    NotifyAddressBookChanged(this, address, strName, ::IsMine(*this, address) != ISMINE_NO,
-                             (fUpdated ? CT_UPDATED : CT_NEW) );
-    if (!fFileBacked)
-        return false;
-    return CWalletDB(strWalletFile).WriteName(CTransfercoinAddress(address).ToString(), strName);
-}
-
-bool CWallet::DelAddressBookName(const CTxDestination& address)
-{
-    {
-        LOCK(cs_wallet); // mapAddressBook
-
-        mapAddressBook.erase(address);
-    }
-
-    NotifyAddressBookChanged(this, address, "", ::IsMine(*this, address) != ISMINE_NO, CT_DELETED);
-
-    if (!fFileBacked)
-        return false;
-    CWalletDB(strWalletFile).EraseName(CTransfercoinAddress(address).ToString());
-    return CWalletDB(strWalletFile).EraseName(CTransfercoinAddress(address).ToString());
-} */
 
 bool CWallet::FindPrivateTransactions(const CTransaction& tx, mapValue_t& mapNarr)
 {
