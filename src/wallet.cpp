@@ -2144,7 +2144,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::strin
     // -- CreateTransaction won't place change between value and narr output.
     //    narration output will be for preceding output
 
-    int nChangePos;
+    //int nChangePos;
     std::string strFailReason;
 
     bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
@@ -2197,7 +2197,7 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std:
         mapRequestCount[wtxNew.GetHash()] = 0;
 
         // Broadcast
-        if (!wtxNew.AcceptToMemoryPool(false))
+        if (!wtxNew.AcceptToMemoryPool(true))
         {
             // This must not fail. The transaction has already been signed and recorded.
             LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
@@ -3398,7 +3398,7 @@ bool CWallet::CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std
     // -- shuffle inputs, change output won't mix enough as it must be not fully random for plantext narrations
     std::random_shuffle(vecSend.begin(), vecSend.end());
 
-    int nChangePos;
+    //int nChangePos;
     std::string strFailReason;
 
     bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
@@ -3504,7 +3504,6 @@ bool CWallet::SendPrivateMoneyToDestination(CPrivateAddress& sxAddress, int64_t 
 
     CKeyID ckidTo = cpkTo.GetID();
 
-    //CTransfercoinAddress addrTo(ckidTo);
     CBitcoinAddress addrTo(ckidTo);
 
     if (SecretToPublicKey(ephem_secret, ephem_pubkey) != 0)

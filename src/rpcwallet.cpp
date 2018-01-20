@@ -2024,7 +2024,7 @@ Value getnewprivateaddress(const Array& params, bool fHelp)
     if (!pwalletMain->AddPrivateAddress(sxAddr))
         throw runtime_error("Could not save to wallet.");
 
-    return sxAddr.Encoded();
+    return sxAddr.Encoded(); // aqui!!!!!
 }
 
 Value listprivateaddresses(const Array& params, bool fHelp)

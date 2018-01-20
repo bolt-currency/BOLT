@@ -33,8 +33,7 @@ SplashScreen::SplashScreen(const QPixmap &pixmap, Qt::WindowFlags f, bool isTest
     QString titleText       = tr("BOLT Core");
     QString versionText     = QString(tr("Version %1")).arg(QString::fromStdString(FormatFullVersion()));
     QString copyrightTextBtc   = QChar(0xA9)+QString(" 2009-2015 ").arg(COPYRIGHT_YEAR) + QString(tr("The Bitcoin Core developers"));
-    QString copyrightTextDrk   = QChar(0xA9)+QString(" 2014-2015 ").arg(COPYRIGHT_YEAR) + QString(tr("The Dash Core developers"));
-    QString copyrightTextChc   = QChar(0xA9)+QString(" 2014-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The BOLT Core developers"));
+    QString copyrightTextChc   = QChar(0xA9)+QString(" 2017-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The Bolt Core developers"));
     QString testnetAddText  = QString(tr("[testnet]")); // define text to place as single text object
 
     QString font            = "Arial";
@@ -71,8 +70,9 @@ SplashScreen::SplashScreen(const QPixmap &pixmap, Qt::WindowFlags f, bool isTest
     // draw copyright stuff
     pixPaint.setFont(QFont(font, 10*fontFactor));
     pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace,copyrightTextBtc);
-    pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace+12,copyrightTextDrk);
-    pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace+24,copyrightTextChc);
+   // pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace+12,copyrightTextDrk);
+    //pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace+24,copyrightTextChc);
+    pixPaint.drawText(paddingLeft,paddingTop+titleCopyrightVSpace+12,copyrightTextChc);
 
     // draw testnet string if testnet is on
     if(isTestNet) {
