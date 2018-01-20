@@ -142,6 +142,7 @@ libbolt_wallet_a_SOURCES = \
   crypter.cpp \
   rpcdump.cpp \
   rpcwallet.cpp \
+  private.cpp \
   wallet.cpp \
   walletdb.cpp \
   keepass.cpp \
@@ -159,7 +160,6 @@ libbolt_common_a_SOURCES = \
   masternode-pos.cpp \
   masternodeman.cpp \
   masternodeconfig.cpp \
-  private.cpp \
   instantx.cpp \
   hash.cpp \
   key.cpp \
