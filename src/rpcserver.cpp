@@ -341,10 +341,11 @@ static const CRPCCommand vRPCCommands[] =
     /* Private Send */
 
     /*{ "getnewprivateaddress",   &getnewprivateaddress,   false,     false,     true },
-    { "listprivateaddresses",   &listprivateaddresses,   false,     false,     true }, */
+     */
     /*{ "scanforprivatetxns",     &scanforprivatetxns,     false,     false,     false }, */
     /*{ "importprivateaddress",   &importprivateaddress,   false,     false,     true },
     */
+    { "listprivateaddresses",   &listprivateaddresses,   false,     false,     true },
     { "sendtoprivateaddress",   &sendtoprivateaddress,   false,     false,     true },
 
     /* Wallet-enabled mining */
