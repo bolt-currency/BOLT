@@ -159,6 +159,7 @@ libbolt_common_a_SOURCES = \
   masternode-pos.cpp \
   masternodeman.cpp \
   masternodeconfig.cpp \
+  private.cpp \
   instantx.cpp \
   hash.cpp \
   key.cpp \
@@ -173,7 +174,6 @@ libbolt_common_a_SOURCES = \
   spork.cpp \
   algorithm/blake.c \
   lz4/lz4.c \
-  private.cpp \
   $(BITCOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT
