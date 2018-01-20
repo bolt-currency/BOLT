@@ -29,7 +29,6 @@
 #include "darksend.h"
 #include "keepass.h"
 #include "instantx.h"
-#include "private.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <openssl/rand.h>
