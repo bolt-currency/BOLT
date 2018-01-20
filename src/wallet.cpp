@@ -21,6 +21,7 @@
  */
 
 #include "wallet.h"
+#include "private.h"
 
 #include "base58.h"
 #include "checkpoints.h"
