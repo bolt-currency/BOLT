@@ -30,7 +30,10 @@ struct AddressTableEntry
     QString address;
 
     AddressTableEntry() {}
-    AddressTableEntry(Type type, const QString &label, const QString &address):
+    /*AddressTableEntry(Type type, const QString &label, const QString &address):
+        type(type), label(label), address(address) {} */
+
+    AddressTableEntry(Type type, const QString &label, const QString &address, const bool &stealth = false):
         type(type), label(label), address(address) {}
 };
 
@@ -92,15 +95,15 @@ public:
                                   QString::fromStdString(address.ToString())));
             }
 
-           /* std::set<CPrivateAddress>::iterator it;
-            for (it = wallet->privateAddresses.begin(); it != wallet->privateAddresses.end(); ++it)
+            std::set<CStealthAddress>::iterator it;
+            for (it = wallet->stealthAddresses.begin(); it != wallet->stealthAddresses.end(); ++it)
             {
                 bool fMine = !(it->scan_secret.size() < 1);
                 cachedAddressTable.append(AddressTableEntry(fMine ? AddressTableEntry::Receiving : AddressTableEntry::Sending,
                                   QString::fromStdString(it->label),
                                   QString::fromStdString(it->Encoded()),
                                   true));
-            }; */
+            }; 
         }
         // qLowerBound() and qUpperBound() require our cachedAddressTable list to be sorted in asc order
         // Even though the map is already sorted this re-sorting step is needed because the originating map

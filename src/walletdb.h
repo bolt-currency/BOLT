@@ -7,7 +7,7 @@
 
 #include "db.h"
 #include "key.h"
-#include "private.h"
+#include "stealth.h"
 
 #include <list>
 #include <stdint.h>
@@ -68,14 +68,13 @@ public:
     }
 };
 
-
-class CPrivateKeyMetadata
+class CStealthKeyMetadata
 {
-// -- used to get secret for keys created by private transaction with wallet locked
+// -- used to get secret for keys created by stealth transaction with wallet locked
 public:
-    CPrivateKeyMetadata() {};
+    CStealthKeyMetadata() {};
     
-    CPrivateKeyMetadata(CPubKey pkEphem_, CPubKey pkScan_)
+    CStealthKeyMetadata(CPubKey pkEphem_, CPubKey pkScan_)
     {
         pkEphem = pkEphem_;
         pkScan = pkScan_;
@@ -91,6 +90,7 @@ public:
     )
 
 };
+
 
 
 /** Access to the wallet database (wallet.dat) */
@@ -119,11 +119,33 @@ public:
 
     bool WriteCScript(const uint160& hash, const CScript& redeemScript);
 
-    /**/
-    bool WritePrivateKeyMeta(const CKeyID& keyId, const CPrivateKeyMetadata& sxKeyMeta);
-    bool ErasePrivateKeyMeta(const CKeyID& keyId);
-    bool WritePrivateAddress(const CPrivateAddress& sxAddr);    
-    bool ReadPrivateAddress(CPrivateAddress& sxAddr);
+
+
+    bool WriteStealthKeyMeta(const CKeyID& keyId, const CStealthKeyMetadata& sxKeyMeta)
+    {
+        nWalletDBUpdated++;
+        return Write(std::make_pair(std::string("sxKeyMeta"), keyId), sxKeyMeta, true);
+    }
+    
+    bool EraseStealthKeyMeta(const CKeyID& keyId)
+    {
+        nWalletDBUpdated++;
+        return Erase(std::make_pair(std::string("sxKeyMeta"), keyId));
+    }
+    
+    bool WriteStealthAddress(const CStealthAddress& sxAddr)
+    {
+        nWalletDBUpdated++;
+
+        return Write(std::make_pair(std::string("sxAddr"), sxAddr.scan_pubkey), sxAddr, true);
+    }
+    
+    bool ReadStealthAddress(CStealthAddress& sxAddr)
+    {
+        // -- set scan_pubkey before reading
+        return Read(std::make_pair(std::string("sxAddr"), sxAddr.scan_pubkey), sxAddr);
+    }
+    
 
     bool WriteBestBlock(const CBlockLocator& locator);
     bool ReadBestBlock(CBlockLocator& locator);

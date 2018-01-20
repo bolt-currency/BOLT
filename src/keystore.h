@@ -39,6 +39,7 @@ public:
 };
 
 typedef std::map<CKeyID, CKey> KeyMap;
+//typedef std::map<CKeyID, std::pair<CSecret, bool> > KeyMap;
 typedef std::map<CScriptID, CScript > ScriptMap;
 
 /** Basic key store, that keeps keys in an address->secret map */

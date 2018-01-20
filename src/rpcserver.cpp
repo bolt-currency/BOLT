@@ -342,9 +342,11 @@ static const CRPCCommand vRPCCommands[] =
 
     /*
      */
-    /*{ "scanforprivatetxns",     &scanforprivatetxns,     false,     false,     false }, */
+    { "scanforprivatetxns",     &scanforprivatetxns,     false,     false,     false }, 
+    { "scanforalltxns",         &scanforalltxns,     false,     false,     false }, 
     /*{ "importprivateaddress",   &importprivateaddress,   false,     false,     true },
     */
+    { "importprivateaddress",   &importprivateaddress,   false,     false,     true },
     { "getnewprivateaddress",   &getnewprivateaddress,   false,     false,     true },
     { "listprivateaddresses",   &listprivateaddresses,   false,     false,     true },
     { "sendtoprivateaddress",   &sendtoprivateaddress,   false,     false,     true },

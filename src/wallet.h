@@ -14,7 +14,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "walletdb.h"
-#include "private.h"
+#include "stealth.h"
 
 #include <algorithm>
 #include <map>
@@ -34,15 +34,15 @@ static const int64_t DEFAULT_TRANSACTION_FEE = 0;
 // -paytxfee will warn if called with a higher fee than this amount (in satoshis) per KB
 static const int nHighTransactionFeeWarning = 0.01 * COIN;
 
+typedef std::map<CKeyID, CStealthKeyMetadata> StealthKeyMetaMap;
+typedef std::map<std::string, std::string> mapValue_t;
+
 class CAccountingEntry;
 class CCoinControl;
 class COutput;
 class CReserveKey;
 class CScript;
 class CWalletTx;
-
-typedef std::map<CKeyID, CPrivateKeyMetadata> PrivateKeyMetaMap;
-typedef std::map<std::string, std::string> mapValue_t;
 
 /** (client) version numbers for particular wallet features */
 enum WalletFeature
@@ -148,7 +148,20 @@ public:
     bool SelectCoinsWithoutDenomination(int64_t nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, int64_t& nValueRet) const;
     bool GetTransaction(const uint256 &hashTx, CWalletTx& wtx);
 
-    bool NewPrivateAddress(std::string& sError, std::string& sLabel, CPrivateAddress& sxAddr);
+
+
+    bool NewStealthAddress(std::string& sError, std::string& sLabel, CStealthAddress& sxAddr);
+    bool AddStealthAddress(CStealthAddress& sxAddr);
+    bool UnlockStealthAddresses(const CKeyingMaterial& vMasterKeyIn);
+    bool UpdateStealthAddress(std::string &addr, std::string &label, bool addIfNotExist);
+    
+    bool CreateStealthTransaction(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl=NULL);
+    std::string SendStealthMoney(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, CWalletTx& wtxNew, bool fAskFee=false);
+    bool SendStealthMoneyToDestination(CStealthAddress& sxAddress, int64_t nValue, CWalletTx& wtxNew, std::string& sError, bool fAskFee=false);
+    bool FindStealthTransactions(const CTransaction& tx);
+
+    
+   /* bool NewPrivateAddress(std::string& sError, std::string& sLabel, CPrivateAddress& sxAddr);
     bool AddPrivateAddress(CPrivateAddress& sxAddr);
     bool UnlockPrivateAddresses(const CKeyingMaterial& vMasterKeyIn);
     bool UpdatePrivateAddress(std::string &addr, std::string &label, bool addIfNotExist);
@@ -156,12 +169,12 @@ public:
     bool CreatePrivateTransaction(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, std::vector<uint8_t>& narr, std::string& sNarr, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl=NULL);
     std::string SendPrivateMoney(CScript scriptPubKey, int64_t nValue, std::vector<uint8_t>& P, std::vector<uint8_t>& narr, std::string& sNarr, CWalletTx& wtxNew, bool fAskFee=false);
     bool SendPrivateMoneyToDestination(CPrivateAddress& sxAddress, int64_t nValue, std::string& sNarr, CWalletTx& wtxNew, std::string& sError, bool fAskFee=false);
-    bool FindPrivateTransactions(const CTransaction& tx, mapValue_t& mapNarr);
+    bool FindPrivateTransactions(const CTransaction& tx, mapValue_t& mapNarr); */
 
 
-    std::set<CPrivateAddress> privateAddresses;
-    PrivateKeyMetaMap mapPrivateKeyMeta;
-    uint32_t nPrivate, nFoundPrivate; // for reporting, zero before use
+    std::set<CStealthAddress> stealthAddresses;
+    StealthKeyMetaMap mapStealthKeyMeta;
+    uint32_t nStealth, nFoundStealth; // for reporting, zero before use
 
     /// Main wallet lock.
     /// This lock protects all the fields added by CWallet

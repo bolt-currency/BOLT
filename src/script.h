@@ -8,7 +8,7 @@
 
 #include "key.h"
 #include "util.h"
-#include "private.h"
+#include "stealth.h"
 
 #include <stdexcept>
 #include <stdint.h>
@@ -221,7 +221,8 @@ public:
  *  A CTxDestination is the internal data type encoded in a CBitcoinAddress
  */
 //typedef boost::variant<CNoDestination, CKeyID, CScriptID> CTxDestination,  CPrivateAddress> CTxDestination;
-typedef boost::variant<CNoDestination, CKeyID, CScriptID, CPrivateAddress> CTxDestination;
+//typedef boost::variant<CNoDestination, CKeyID, CScriptID, CPrivateAddress> CTxDestination;
+typedef boost::variant<CNoDestination, CKeyID, CScriptID, CStealthAddress> CTxDestination;
 
 const char* GetTxnOutputType(txnouttype t);
 

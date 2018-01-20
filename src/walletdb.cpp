@@ -180,7 +180,7 @@ bool CWalletDB::WriteAccountingEntry(const CAccountingEntry& acentry)
 }
 
 
-bool CWalletDB::WritePrivateKeyMeta(const CKeyID& keyId, const CPrivateKeyMetadata& sxKeyMeta)
+/*bool CWalletDB::WritePrivateKeyMeta(const CKeyID& keyId, const CPrivateKeyMetadata& sxKeyMeta)
 {
     nWalletDBUpdated++;
     return Write(std::make_pair(std::string("sxKeyMeta"), keyId), sxKeyMeta, true);
@@ -203,7 +203,7 @@ bool CWalletDB::ReadPrivateAddress(CPrivateAddress& sxAddr)
 {
     // -- set scan_pubkey before reading
     return Read(std::make_pair(std::string("sxAddr"), sxAddr.scan_pubkey), sxAddr);
-}
+} */
 
 int64_t CWalletDB::GetAccountCreditDebit(const string& strAccount)
 {
@@ -415,17 +415,15 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
                     wtx.GetHash().ToString(),
                     wtx.hashBlock.ToString()
             );
-        }
-        else if (strType == "sxAddr")
+        }else if (strType == "sxAddr")
         {
-            if (fDebug)
-                printf("WalletDB ReadKeyValue sxAddr\n");
+            // if (fDebug) printf("WalletDB ReadKeyValue sxAddr\n");
             
-            CPrivateAddress sxAddr;
+            CStealthAddress sxAddr;
             ssValue >> sxAddr;
             
-            pwallet->privateAddresses.insert(sxAddr);
-        } 
+            pwallet->stealthAddresses.insert(sxAddr);
+        }
         else if (strType == "acentry")
         {
             string strAccount;
@@ -553,7 +551,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
                 pwallet->nTimeFirstKey = keyMeta.nCreateTime;
         }else if (strType == "sxKeyMeta")
         {
-            if (fDebug)
+            /*if (fDebug)
                 printf("WalletDB ReadKeyValue sxKeyMeta\n");
             
             CKeyID keyId;
@@ -561,7 +559,13 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             CPrivateKeyMetadata sxKeyMeta;
             ssValue >> sxKeyMeta;
 
-            pwallet->mapPrivateKeyMeta[keyId] = sxKeyMeta;
+            pwallet->mapPrivateKeyMeta[keyId] = sxKeyMeta;*/
+            CKeyID keyId;
+            ssKey >> keyId;
+            CStealthKeyMetadata sxKeyMeta;
+            ssValue >> sxKeyMeta;
+
+            pwallet->mapStealthKeyMeta[keyId] = sxKeyMeta;
         }
         else if (strType == "defaultkey")
         {

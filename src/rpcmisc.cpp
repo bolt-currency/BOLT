@@ -12,7 +12,7 @@
 #include "rpcserver.h"
 #include "util.h"
 #include "spork.h"
-#include "private.h"
+#include "stealth.h"
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #include "walletdb.h"
@@ -130,7 +130,7 @@ public:
         return obj;
     }
 
-    Object operator()(const CPrivateAddress &stxAddr) const {
+     Object operator()(const CStealthAddress &stxAddr) const {
         Object obj;
         obj.push_back(Pair("todo", true));
         return obj;

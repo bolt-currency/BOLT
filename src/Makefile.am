@@ -62,6 +62,7 @@ BITCOIN_CORE_H = \
   net.h \
   noui.h \
   protocol.h \
+  stealth.h \
   rpcclient.h \
   rpcprotocol.h \
   rpcserver.h \
@@ -89,7 +90,6 @@ BITCOIN_CORE_H = \
   uint256.h \
   util.h \
   version.h \
-  private.h  \
   walletdb.h \
   wallet.h
 
@@ -142,7 +142,7 @@ libbolt_wallet_a_SOURCES = \
   crypter.cpp \
   rpcdump.cpp \
   rpcwallet.cpp \
-  private.cpp \
+  stealth.cpp \
   wallet.cpp \
   walletdb.cpp \
   keepass.cpp \

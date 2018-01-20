@@ -482,9 +482,9 @@ static void NotifyAddressBookChanged(WalletModel *walletmodel, CWallet *wallet,
         const CTxDestination &address, const std::string &label, bool isMine,
         const std::string &purpose, ChangeType status)
 {
-    if (address.type() == typeid(CPrivateAddress))
+    if (address.type() == typeid(CStealthAddress))
     {
-        CPrivateAddress sxAddr = boost::get<CPrivateAddress>(address);
+        CStealthAddress sxAddr = boost::get<CStealthAddress>(address);
         std::string enc = sxAddr.Encoded();
         LogPrintf("NotifyAddressBookChanged %s %s isMine=%i status=%i\n", enc.c_str(), label.c_str(), isMine, status);
         QMetaObject::invokeMethod(walletmodel, "updateAddressBook", Qt::QueuedConnection,
