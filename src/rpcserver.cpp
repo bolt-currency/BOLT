@@ -344,7 +344,8 @@ static const CRPCCommand vRPCCommands[] =
     { "listprivateaddresses",   &listprivateaddresses,   false,     false,     true }, */
     /*{ "scanforprivatetxns",     &scanforprivatetxns,     false,     false,     false }, */
     /*{ "importprivateaddress",   &importprivateaddress,   false,     false,     true },
-    { "sendtoprivateaddress",   &sendtoprivateaddress,   false,     false,     true },*/
+    */
+    { "sendtoprivateaddress",   &sendtoprivateaddress,   false,     false,     true },
 
     /* Wallet-enabled mining */
     { "getgenerate",            &getgenerate,            true,      false,      false },
