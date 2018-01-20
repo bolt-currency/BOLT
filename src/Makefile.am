@@ -170,7 +170,6 @@ libbolt_common_a_SOURCES = \
   sync.cpp \
   util.cpp \
   version.cpp \
-  aes_helper.c \
   spork.cpp \
   algorithm/blake.c \
   lz4/lz4.c \
