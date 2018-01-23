@@ -14,19 +14,15 @@
 #define MASTERNODELIST_UPDATE_SECONDS                    15
 #define MASTERNODELIST_FILTER_COOLDOWN_SECONDS            3
 
-namespace Masternode {
-
-    enum MnCommand {
-        Unknown = 0,
-        StartAlias,
-        StartAll,
-        StartMissing,
-        StopAlias,
-        StopAll,
-        AutostartMissing
-    };
-
-};
+/*enum MnCommand {
+    Unknown = 0,
+    StartAlias,
+    StartAll,
+    StartMissing,
+    StopAlias,
+    StopAll,
+    AutostartMissing
+};*/
 
 namespace Ui {
     class MasternodeList;
@@ -51,7 +47,7 @@ public:
     void setClientModel(ClientModel *clientModel);
     void setWalletModel(WalletModel *walletModel);
     void StartAlias(std::string strAlias);
-    void StartMasternodes(Masternode::MnCommand cmd = Masternode::MnCommand::StartAll);
+    //void StartMasternodes(MnCommand cmd = MnCommand::StartAll);
 
 private:
     QMenu *contextMenu;

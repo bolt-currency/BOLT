@@ -16,26 +16,26 @@
 #include <QTimer>
 #include <QMessageBox>
 
-const std::string GetEnumStr(Masternode::MnCommand cmd) {
+/*const std::string GetEnumStr(MnCommand cmd) {
     switch (cmd){
-    case Masternode::MnCommand::Unknown:
+    case MnCommand::Unknown:
         return "Unknown";
-    case Masternode::MnCommand::StartAlias:
+    case MnCommand::StartAlias:
         return "StartAlias";
-    case Masternode::MnCommand::StartAll:
+    case MnCommand::StartAll:
         return "StartAll";
-    case Masternode::MnCommand::StartMissing:
+    case MnCommand::StartMissing:
         return "StartMissing";
-    case Masternode::MnCommand::StopAlias:
+    case MnCommand::StopAlias:
         return "StopAlias";
-    case Masternode::MnCommand::StopAll:
+    case MnCommand::StopAll:
         return "StopAll";
-    case Masternode::MnCommand::AutostartMissing:
+    case MnCommand::AutostartMissing:
         return "AutostartMissing";
     default:
         return "Unknown";
     }
-}
+}*/
 
 MasternodeList::MasternodeList(QWidget *parent) :
     QWidget(parent),
@@ -167,7 +167,7 @@ void MasternodeList::StartAlias(std::string strAlias)
     updateMyNodeList(true);
 }
 
-void MasternodeList::StartMasternodes(Masternode::MnCommand mnCmd)
+/*void MasternodeList::StartMasternodes(MnCommand mnCmd)
 {
     int nCountSuccessful = 0;
     int nCountFailed = 0;
@@ -179,7 +179,7 @@ void MasternodeList::StartMasternodes(Masternode::MnCommand mnCmd)
         std::string strDonationPercentage = mne.getDonationPercentage();
 
         CTxIn txin = CTxIn(uint256(ParseHex(mne.getTxHash())), QString::fromStdString(mne.getOutputIndex()).toInt());
-        if(mnCmd == Masternode::MnCommand::StartMissing && mnodeman.Find(txin)) continue;
+        if(mnCmd == MnCommand::StartMissing && mnodeman.Find(txin)) continue;
 
         bool result = activeMasternode.Register(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), strDonateAddress, strDonationPercentage, strError);
 
@@ -203,7 +203,7 @@ void MasternodeList::StartMasternodes(Masternode::MnCommand mnCmd)
     msg.exec();
 
     updateMyNodeList(true);
-}
+} */
 
 void MasternodeList::updateMyMasternodeInfo(QString strAlias, QString strAddr, CMasternode* infoMn)
 {
@@ -285,7 +285,7 @@ void MasternodeList::updateMyNodeList(bool fForce)
 
         CMasternode *infoMn = mnodeman.Find(txin);
         if (!infoMn && bAutostartMissing) {
-            StartMasternodes(Masternode::MnCommand::StartMissing);
+            //StartMasternodes(MnCommand::StartMissing);
             return;
         }
 
@@ -421,11 +421,11 @@ void MasternodeList::on_startAllButton_clicked()
 
         if(!ctx.isValid()) return; // Unlock wallet was cancelled
 
-        StartMasternodes();
+        //StartMasternodes();
         return;
     }
 
-    StartMasternodes();
+    //StartMasternodes();
 }
 
 void MasternodeList::on_startMissingButton_clicked()
@@ -452,11 +452,11 @@ void MasternodeList::on_startMissingButton_clicked()
 
         if(!ctx.isValid()) return; // Unlock wallet was cancelled
 
-        StartMasternodes(Masternode::MnCommand::StartMissing);
+       // StartMasternodes(MnCommand::StartMissing);
         return;
     }
 
-    StartMasternodes(Masternode::MnCommand::StartMissing);
+   // StartMasternodes(MnCommand::StartMissing);
 }
 
 void MasternodeList::on_tableWidgetMyMasternodes_itemSelectionChanged()
