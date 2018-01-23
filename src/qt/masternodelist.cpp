@@ -16,21 +16,21 @@
 #include <QTimer>
 #include <QMessageBox>
 
-const std::string GetEnumStr(MnCommand cmd) {
+const std::string GetEnumStr(Masternode::MnCommand cmd) {
     switch (cmd){
-    case MnCommand::Unknown:
+    case Masternode::MnCommand::Unknown:
         return "Unknown";
-    case MnCommand::StartAlias:
+    case Masternode::MnCommand::StartAlias:
         return "StartAlias";
-    case MnCommand::StartAll:
+    case Masternode::MnCommand::StartAll:
         return "StartAll";
-    case MnCommand::StartMissing:
+    case Masternode::MnCommand::StartMissing:
         return "StartMissing";
-    case MnCommand::StopAlias:
+    case Masternode::MnCommand::StopAlias:
         return "StopAlias";
-    case MnCommand::StopAll:
+    case Masternode::MnCommand::StopAll:
         return "StopAll";
-    case MnCommand::AutostartMissing:
+    case Masternode::MnCommand::AutostartMissing:
         return "AutostartMissing";
     default:
         return "Unknown";
@@ -167,7 +167,7 @@ void MasternodeList::StartAlias(std::string strAlias)
     updateMyNodeList(true);
 }
 
-void MasternodeList::StartMasternodes(MnCommand mnCmd)
+void MasternodeList::StartMasternodes(Masternode::MnCommand mnCmd)
 {
     int nCountSuccessful = 0;
     int nCountFailed = 0;
@@ -179,7 +179,7 @@ void MasternodeList::StartMasternodes(MnCommand mnCmd)
         std::string strDonationPercentage = mne.getDonationPercentage();
 
         CTxIn txin = CTxIn(uint256(ParseHex(mne.getTxHash())), QString::fromStdString(mne.getOutputIndex()).toInt());
-        if(mnCmd == MnCommand::StartMissing && mnodeman.Find(txin)) continue;
+        if(mnCmd == Masternode::MnCommand::StartMissing && mnodeman.Find(txin)) continue;
 
         bool result = activeMasternode.Register(mne.getIp(), mne.getPrivKey(), mne.getTxHash(), mne.getOutputIndex(), strDonateAddress, strDonationPercentage, strError);
 
@@ -285,7 +285,7 @@ void MasternodeList::updateMyNodeList(bool fForce)
 
         CMasternode *infoMn = mnodeman.Find(txin);
         if (!infoMn && bAutostartMissing) {
-            StartMasternodes(MnCommand::StartMissing);
+            StartMasternodes(Masternode::MnCommand::StartMissing);
             return;
         }
 
@@ -452,11 +452,11 @@ void MasternodeList::on_startMissingButton_clicked()
 
         if(!ctx.isValid()) return; // Unlock wallet was cancelled
 
-        StartMasternodes(MnCommand::StartMissing);
+        StartMasternodes(Masternode::MnCommand::StartMissing);
         return;
     }
 
-    StartMasternodes(MnCommand::StartMissing);
+    StartMasternodes(Masternode::MnCommand::StartMissing);
 }
 
 void MasternodeList::on_tableWidgetMyMasternodes_itemSelectionChanged()
