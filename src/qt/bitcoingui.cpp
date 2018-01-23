@@ -263,6 +263,18 @@ void BitcoinGUI::createActions(bool fIsTestnet)
 #endif
     tabGroup->addAction(receiveCoinsAction);
 
+
+/* Private Addresses */
+
+stealthAddressAction = new QAction(QIcon(":/icons/stealth_addresses"), tr("&Private Addresses"), this);
+stealthAddressAction->setStatusTip(tr("Show the list of private addresses for receiving payments"));
+stealthAddressAction->setToolTip(stealthAddressAction->statusTip());
+stealthAddressAction->setCheckable(true);
+stealthAddressAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
+tabGroup->addAction(stealthAddressAction);
+
+
+
     historyAction = new QAction(QIcon(":/icons/transaction"), tr("&Transactions"), this);
     historyAction->setStatusTip(tr("Browse transaction history"));
     historyAction->setToolTip(historyAction->statusTip());
@@ -287,6 +299,7 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     tabGroup->addAction(masternodeList);
 
 
+
 /* Block Explorer */
 
 blockAction = new QAction(QIcon(":/icons/explorer"), tr("&Block Explorer"), this);
@@ -294,6 +307,7 @@ blockAction->setToolTip(tr("Explore the BlockChain"));
 blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
 blockAction->setCheckable(true);
 tabGroup->addAction(blockAction);
+
 
 #if !defined(Q_OS_MAC)
 #if !defined(Q_OS_WIN)
@@ -318,10 +332,13 @@ tabGroup->addAction(blockAction);
     connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(gotoSendCoinsPage()));
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
+    connect(stealthAddressAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(stealthAddressAction, SIGNAL(triggered()), this, SLOT(gotoStealthAddressPage()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
     connect(masternodeList, SIGNAL(triggered()), this, SLOT(gotomasternodeList()));
     connect(blockAction, SIGNAL(triggered()), this, SLOT(gotoBlockBrowser()));
+    
 
     #if !defined(Q_OS_MAC)
     #if !defined(Q_OS_WIN)
@@ -481,8 +498,10 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(overviewAction);
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
+        //toolbar->addAction(stealthAddressAction);
         toolbar->addAction(historyAction);
         toolbar->addAction(masternodeList);
+        
         toolbar->addAction(blockAction);
         
         #if !defined(Q_OS_MAC)
@@ -575,6 +594,9 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     verifyMessageAction->setEnabled(enabled);
     usedSendingAddressesAction->setEnabled(enabled);
     usedReceivingAddressesAction->setEnabled(enabled);
+
+    stealthAddressAction->setEnabled(enabled);
+
     openAction->setEnabled(enabled);
     #if !defined(Q_OS_MAC)
     #if !defined(Q_OS_WIN)
@@ -749,6 +771,11 @@ void BitcoinGUI::gotoSignMessageTab(QString addr)
 void BitcoinGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
+}
+
+void BitcoinGUI::gotoStealthAddressPage()
+{
+    if (walletFrame) walletFrame->gotoStealthAddressPage();
 }
 #endif
 

@@ -136,3 +136,13 @@ Other commands:
     ./boltd -daemon # to start the bolt daemon.
     ./bolt-cli --help  # for a list of command-line options.
     ./bolt-cli help    # When the daemon is running, to get a list of RPC commands
+
+### Building Bolt-qt
+
+1. You'll need some devepencies for builing .dmg files. Use Homebrew instead Ports it will be easy.
+
+Open your terminal and run this code: 
+commands:
+
+    brew install librsvg imagemagick libtiff
+    make deploy

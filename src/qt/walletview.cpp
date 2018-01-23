@@ -72,13 +72,17 @@ WalletView::WalletView(QWidget *parent):
 
     blockBrowser = new BlockBrowser();
 
+    stealthAddressPage = new AddressBookPage(AddressBookPage::ForEditing, AddressBookPage::StealthAddressTab);        
+
     // loggerPage = new LoggerPage();
     addWidget(overviewPage);
     addWidget(transactionsPage);
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
+    addWidget(stealthAddressPage);
     addWidget(masternodeList);
     addWidget(blockBrowser);
+    
 
     #if !defined(Q_OS_MAC)
     #if !defined(Q_OS_WIN)
@@ -131,6 +135,11 @@ void WalletView::setClientModel(ClientModel *clientModel)
     this->clientModel = clientModel;
 
     overviewPage->setClientModel(clientModel);
+
+    //stealthAddressPage->setClientModel(clientModel);
+    //stealthAddressPage->setModel(clientModel->getAddressTableModel());
+    //stealthAddressPage.setModel(clientModel->getAddressTableModel());
+
     masternodeList->setClientModel(clientModel);
 }
 
@@ -138,11 +147,16 @@ void WalletView::setWalletModel(WalletModel *walletModel)
 {
     this->walletModel = walletModel;
 
+
     // Put transaction list in tabs
     transactionView->setModel(walletModel);
     overviewPage->setWalletModel(walletModel);
     receiveCoinsPage->setModel(walletModel);
     sendCoinsPage->setModel(walletModel);
+
+    stealthAddressPage->setModel(walletModel->getAddressTableModel());
+
+
     masternodeList->setWalletModel(walletModel);
 
     if (walletModel)
@@ -212,6 +226,12 @@ void WalletView::gotoHistoryPage()
 void WalletView::gotoReceiveCoinsPage()
 {
     setCurrentWidget(receiveCoinsPage);
+}
+
+void WalletView::gotoStealthAddressPage()
+{
+    //gui->getStealthAddressAction()->setChecked(true);
+    setCurrentWidget(stealthAddressPage);
 }
 
 void WalletView::gotoSendCoinsPage(QString addr)

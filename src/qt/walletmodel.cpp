@@ -170,10 +170,51 @@ void WalletModel::updateAddressBook(const QString &address, const QString &label
         addressTableModel->updateEntry(address, label, isMine, purpose, status);
 }
 
-bool WalletModel::validateAddress(const QString &address)
+void WalletModel::updateAddressBook(const QString &address, const QString &label)
 {
+    if(addressTableModel)
+        addressTableModel->updateEntry(address, label);
+}
+
+
+/*bool WalletModel::validateAddress(const QString &address)
+{
+
+    std::string sAddr = address.toStdString();
+
+    if (sAddr.length() > 75)
+    {
+        if (IsStealthAddress(sAddr))
+            return true;
+    };
+    
     CBitcoinAddress addressParsed(address.toStdString());
-    return addressParsed.IsValid();
+    return addressParsed.IsValid(); 
+}*/
+
+bool WalletModel::validateAddress(const QString &address, bool supportStealthAddress)
+{
+    bool result = false;
+
+    if(supportStealthAddress)
+    {
+        if(address.toStdString().length() < 40){
+            // check Normal address
+            CBitcoinAddress addressParsed(address.toStdString());
+            result = addressParsed.IsValid();
+        }else{
+            // check Private stealth address
+            CStealthAddress stealthAddress;
+            result = stealthAddress.SetEncoded(address.toStdString());
+            return true;
+        }
+    }else{
+        // check Norma address
+        CBitcoinAddress addressParsed(address.toStdString());
+        result = addressParsed.IsValid();
+    }
+
+    return result;
 }
 
 WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, const CCoinControl *coinControl)
@@ -255,6 +296,8 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         return SendCoinsReturn(AmountWithFeeExceedsBalance);
     }
 
+    std::map<int, std::string> mapStealthNarr;
+
     {
         LOCK2(cs_main, wallet->cs_wallet);
 
@@ -272,9 +315,29 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             return TransactionCreationFailed;
         }
 
-        bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, strFailReason, coinControl, recipients[0].inputType, recipients[0].useInstantX);
-         if(!wallet->CommitTransaction(*newTx, *keyChange, (recipients[0].useInstantX) ? "txlreq" : "tx"))
-        transaction.setTransactionFee(nFeeRequired);
+        int nChangePos = -1;
+        bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, nChangePos, strFailReason, coinControl, recipients[0].inputType, recipients[0].useInstantX);
+
+        /*std::map<int, std::string>::iterator it;
+        for (it = mapStealthNarr.begin(); it != mapStealthNarr.end(); ++it)
+        {
+            int pos = it->first;
+            if (nChangePos > -1 && it->first >= nChangePos)
+                pos++;
+
+            char key[64];
+            if (snprintf(key, sizeof(key), "n_%u", pos) < 1)
+            {
+                printf("CreateStealthTransaction(): Error creating narration key.");
+                continue;
+            };
+            newTx.mapValue[key] = it->second;
+        }; */
+
+
+        //bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, strFailReason, coinControl, recipients[0].inputType, recipients[0].useInstantX);
+        if(!wallet->CommitTransaction(*newTx, *keyChange, (recipients[0].useInstantX) ? "txlreq" : "tx", true))
+            transaction.setTransactionFee(nFeeRequired);
 
         if(!fCreated)
         {
@@ -325,7 +388,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
 
         transaction.getRecipients();
 
-        if(!wallet->CommitTransaction(*newTx, *keyChange, (recipients[0].useInstantX) ? "txlreq" : "tx"))
+        if(!wallet->CommitTransaction(*newTx, *keyChange, (recipients[0].useInstantX) ? "txlreq" : "tx", true))
             return TransactionCommitFailed;
 
         CTransaction* t = (CTransaction*)newTx;

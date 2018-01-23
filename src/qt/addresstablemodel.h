@@ -45,6 +45,7 @@ public:
 
     static const QString Send;      /**< Specifies send address */
     static const QString Receive;   /**< Specifies receive address */
+    static const QString Stealth;   /**< Specifies stealth address */
 
     /** @name Methods overridden from QAbstractTableModel
         @{*/
@@ -72,6 +73,8 @@ public:
      */
     int lookupAddress(const QString &address) const;
 
+    void importStealthAddress();
+
     EditStatus getEditStatus() const { return editStatus; }
 
 private:
@@ -88,6 +91,7 @@ public slots:
     /* Update address list from core.
      */
     void updateEntry(const QString &address, const QString &label, bool isMine, const QString &purpose, int status);
+    void updateEntry(const QString &address, const QString &label);
 
     friend class AddressTablePriv;
 };

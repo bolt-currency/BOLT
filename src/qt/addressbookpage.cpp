@@ -22,11 +22,12 @@
 #include <QSortFilterProxyModel>
 
 AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::AddressBookPage),
-    model(0),
     mode(mode),
-    tab(tab)
+    tab(tab),
+    QDialog(parent),
+    model(0),
+    ui(new Ui::AddressBookPage)
+    
 {
     ui->setupUi(this);
 
@@ -35,41 +36,58 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     ui->copyAddress->setIcon(QIcon());
     ui->deleteAddress->setIcon(QIcon());
     ui->exportButton->setIcon(QIcon());
+    //ui->importStealthAddress->setIcon(QIcon());
 #endif
 
     switch(mode)
     {
-    case ForSelection:
-        switch(tab)
-        {
-        case SendingTab: setWindowTitle(tr("Choose the address to send coins to")); break;
-        case ReceivingTab: setWindowTitle(tr("Choose the address to receive coins with")); break;
-        }
-        connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(accept()));
-        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->tableView->setFocus();
-        ui->closeButton->setText(tr("C&hoose"));
-        ui->exportButton->hide();
-        break;
-    case ForEditing:
-        switch(tab)
-        {
-        case SendingTab: setWindowTitle(tr("Sending addresses")); break;
-        case ReceivingTab: setWindowTitle(tr("Receiving addresses")); break;
-        }
-        break;
+        case ForSelection:
+            switch(tab)
+            {
+                case SendingTab: setWindowTitle(tr("Choose the address to send coins to")); break;
+                case ReceivingTab: setWindowTitle(tr("Choose the address to receive coins with")); break;
+            }
+            connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(accept()));
+            ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            ui->tableView->setFocus();
+            ui->closeButton->setText(tr("C&hoose"));
+            ui->exportButton->hide();
+            break;
+        case ForEditing:
+            switch(tab)
+            {
+                case SendingTab: setWindowTitle(tr("Sending addresses")); break;
+                case ReceivingTab: setWindowTitle(tr("Receiving addresses")); break;
+            }
+
+            break;
     }
     switch(tab)
     {
-    case SendingTab:
-        ui->labelExplanation->setText(tr("These are your BOLT addresses for sending payments. Always check the amount and the receiving address before sending coins."));
-        ui->deleteAddress->setVisible(true);
+        case SendingTab:
+            ui->labelExplanation->setText(tr("These are your Bolt addresses for sending payments. Always check the amount and the receiving address before sending coins."));
+            ui->deleteAddress->setVisible(true);
         break;
-    case ReceivingTab:
-        ui->labelExplanation->setText(tr("These are your BOLT addresses for receiving payments. It is recommended to use a new receiving address for each transaction."));
-        ui->deleteAddress->setVisible(false);
+
+        case ReceivingTab:
+            ui->labelExplanation->setText(tr("These are your Bolt addresses for receiving payments. It is recommended to use a new receiving address for each transaction."));
+            ui->deleteAddress->setVisible(false);
+        break;
+
+
+        case StealthAddressTab:
+            ui->labelExplanation->setText(tr("These are your Bolt private addresses for receiving payments."));
+            ui->deleteAddress->setVisible(false);
+            ui->newAddress->setVisible(false);
+            ui->copyAddress->setVisible(false);
+            //ui->importStealthAddress->setVisible(false);
+            //ui->newStealthAddress->setVisible(true);
+            ui->exportButton->hide();
+            //ui->resetPrivateKeysButton->setVisible(true);
         break;
     }
+
+
 
     // Context menu actions
     QAction *copyAddressAction = new QAction(tr("&Copy Address"), this);
@@ -82,6 +100,12 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     contextMenu->addAction(copyAddressAction);
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(editAction);
+
+    if(tab != StealthAddressTab){
+        contextMenu->addAction(editAction);
+    }
+
+
     if(tab == SendingTab)
         contextMenu->addAction(deleteAction);
     contextMenu->addSeparator();
@@ -124,6 +148,12 @@ void AddressBookPage::setModel(AddressTableModel *model)
         // Send filter
         proxyModel->setFilterRole(AddressTableModel::TypeRole);
         proxyModel->setFilterFixedString(AddressTableModel::Send);
+        break;
+
+    case StealthAddressTab:
+        // Stealth filter
+        proxyModel->setFilterRole(AddressTableModel::TypeRole);
+        proxyModel->setFilterFixedString(AddressTableModel::Stealth);
         break;
     }
     ui->tableView->setModel(proxyModel);
@@ -238,6 +268,26 @@ void AddressBookPage::selectionChanged()
         ui->deleteAddress->setEnabled(false);
         ui->copyAddress->setEnabled(false);
     }
+}
+
+void AddressBookPage::on_importStealthAddress_clicked()
+{
+    model->importStealthAddress();
+}
+
+
+void AddressBookPage::on_newStealthAddress_clicked()
+{
+    if(!model)
+        return;
+
+    EditAddressDialog dlg(EditAddressDialog::NewStealthAddress, this);
+    dlg.setModel(model);
+    if(dlg.exec())
+    {
+        newAddressToSelect = dlg.getAddress();
+    }
+
 }
 
 void AddressBookPage::done(int retval)

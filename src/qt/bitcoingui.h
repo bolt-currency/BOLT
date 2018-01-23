@@ -104,6 +104,7 @@ private:
     QAction *masternodeList;
     QAction *openLoggerAction;
     QAction *blockAction;
+    QAction *stealthAddressAction;
     
     BlockBrowser *blockBrowser;
 
@@ -180,6 +181,9 @@ private slots:
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
     void gotoSendCoinsPage(QString addr = "");
+
+     /** Switch to stealth address page */
+    void gotoStealthAddressPage();
 
     /** Switch to block explorer*/
     void gotoBlockBrowser();

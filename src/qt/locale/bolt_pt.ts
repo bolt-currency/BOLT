@@ -2304,7 +2304,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     <message>
         <location filename="../guiutil.cpp" line="101"/>
         <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation type="unfinished"/>
+        <translation>Digite um Endereço Bolt  (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
 </context>
 <context>
@@ -2916,7 +2916,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
         <location filename="../sendcoinsdialog.cpp" line="151"/>
         <location filename="../sendcoinsdialog.cpp" line="160"/>
         <source>using</source>
-        <translation type="unfinished"/>
+        <translation>usando</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="145"/>
@@ -3053,7 +3053,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="54"/>
         <source>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>O endereço para enviar pagamento para (ex: BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <translation>O endereço para enviar pagamento para Endereço comum ou Endereço Privado</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="61"/>
@@ -3268,7 +3268,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="31"/>
         <source>Enter a BOLT address (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation type="unfinished"/>
+        <translation>Digite um Endereço Bolt  (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
     </message>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="114"/>

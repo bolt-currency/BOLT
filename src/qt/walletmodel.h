@@ -139,7 +139,8 @@ public:
     EncryptionStatus getEncryptionStatus() const;
 
     // Check address for validity
-    bool validateAddress(const QString &address);
+    //bool validateAddress(const QString &address);
+    bool validateAddress(const QString &address, bool supportStealthAddress=false);
 
     // Return status record for SendCoins, contains error id + information
     struct SendCoinsReturn
@@ -260,6 +261,8 @@ public slots:
     void updateTransaction();
     /* New, updated or removed address book entry */
     void updateAddressBook(const QString &address, const QString &label, bool isMine, const QString &purpose, int status);
+    /* New stealth address book entry */
+    void updateAddressBook(const QString &address, const QString &label);
     /* Current, immature or unconfirmed balance might have changed - emit 'balanceChanged' if so */
     void pollBalanceChanged();
 };

@@ -31,7 +31,8 @@ class AddressBookPage : public QDialog
 public:
     enum Tabs {
         SendingTab = 0,
-        ReceivingTab = 1
+        ReceivingTab = 1,
+        StealthAddressTab = 2
     };
 
     enum Mode {
@@ -39,10 +40,11 @@ public:
         ForEditing  /**< Open address book for editing */
     };
 
-    explicit AddressBookPage(Mode mode, Tabs tab, QWidget *parent);
+    explicit AddressBookPage(Mode mode, Tabs tab, QWidget *parent = 0);
     ~AddressBookPage();
 
     void setModel(AddressTableModel *model);
+
     const QString &getReturnValue() const { return returnValue; }
 
 public slots:
@@ -70,6 +72,10 @@ private slots:
     void onCopyLabelAction();
     /** Edit currently selected address entry (no button) */
     void onEditAction();
+    /** Imported Stealth Address Transactions */
+    void on_importStealthAddress_clicked();
+    /** New Stealth Address */
+    void on_newStealthAddress_clicked();
     /** Export button clicked */
     void on_exportButton_clicked();
 

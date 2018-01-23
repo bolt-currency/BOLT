@@ -18,6 +18,7 @@ class WalletModel;
 class MasternodeList;
 class LoggerPage;
 class BlockBrowser;
+class AddressBookPage;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -66,6 +67,8 @@ private:
     SendCoinsDialog *sendCoinsPage;
     BlockBrowser *blockBrowser;
 
+    AddressBookPage *stealthAddressPage;
+
     TransactionView *transactionView;
 
     QProgressDialog *progressDialog;
@@ -93,6 +96,11 @@ public slots:
     /** Show Sign/Verify Message dialog and switch to verify message tab */
     void gotoVerifyMessageTab(QString addr = "");
 
+        /** Switch to stealth address page */
+    void gotoStealthAddressPage();
+
+    /** Switch to address book page */
+    //void gotoAddressBookPage();
     /** Show incoming transaction notification for new transactions.
 
         The new items are those between start and end inclusive, under the given parent item.

@@ -11,17 +11,21 @@
 #include "base58.h"
 #include "wallet.h"
 
+#include "stealth.h"
+
 #include <QFont>
 #include <QDebug>
 
 const QString AddressTableModel::Send = "S";
 const QString AddressTableModel::Receive = "R";
+const QString AddressTableModel::Stealth= "X";
 
 struct AddressTableEntry
 {
     enum Type {
         Sending,
         Receiving,
+        Stealth,
         Hidden /* QSortFilterProxyModel will filter these out */
     };
 
@@ -30,8 +34,6 @@ struct AddressTableEntry
     QString address;
 
     AddressTableEntry() {}
-    /*AddressTableEntry(Type type, const QString &label, const QString &address):
-        type(type), label(label), address(address) {} */
 
     AddressTableEntry(Type type, const QString &label, const QString &address, const bool &stealth = false):
         type(type), label(label), address(address) {}
@@ -95,20 +97,41 @@ public:
                                   QString::fromStdString(address.ToString())));
             }
 
-            std::set<CStealthAddress>::iterator it;
-            for (it = wallet->stealthAddresses.begin(); it != wallet->stealthAddresses.end(); ++it)
+            BOOST_FOREACH(const CStealthAddress& it, wallet->stealthAddresses)
             {
-                bool fMine = !(it->scan_secret.size() < 1);
-                cachedAddressTable.append(AddressTableEntry(fMine ? AddressTableEntry::Receiving : AddressTableEntry::Sending,
-                                  QString::fromStdString(it->label),
-                                  QString::fromStdString(it->Encoded()),
-                                  true));
-            }; 
+               cachedAddressTable.append(AddressTableEntry(AddressTableEntry::Stealth,
+                                  QString::fromStdString(it.label),
+                                  QString::fromStdString(it.Encoded())));
+
+            } 
         }
         // qLowerBound() and qUpperBound() require our cachedAddressTable list to be sorted in asc order
         // Even though the map is already sorted this re-sorting step is needed because the originating map
         // is sorted by binary address, not by base58() address.
         qSort(cachedAddressTable.begin(), cachedAddressTable.end(), AddressTableEntryLessThan());
+    }
+
+
+    void updateEntry(const QString &address, const QString &label)
+    {
+        // Find address / label in model
+        QList<AddressTableEntry>::iterator lower = qLowerBound(
+            cachedAddressTable.begin(), cachedAddressTable.end(), address, AddressTableEntryLessThan());
+        QList<AddressTableEntry>::iterator upper = qUpperBound(
+            cachedAddressTable.begin(), cachedAddressTable.end(), address, AddressTableEntryLessThan());
+        int lowerIndex = (lower - cachedAddressTable.begin());
+        bool inModel = (lower != upper);
+        AddressTableEntry::Type newEntryType = AddressTableEntry::Stealth;
+
+        if(inModel)
+        {
+            //OutputDebugStringF("Warning: AddressTablePriv::updateEntry: Got CT_NOW, but entry is already in model\n");
+        }else{
+            parent->beginInsertRows(QModelIndex(), lowerIndex, lowerIndex);
+            cachedAddressTable.insert(lowerIndex, AddressTableEntry(newEntryType, label, address));
+            parent->endInsertRows();
+        }
+
     }
 
     void updateEntry(const QString &address, const QString &label, bool isMine, const QString &purpose, int status)
@@ -121,7 +144,9 @@ public:
         int lowerIndex = (lower - cachedAddressTable.begin());
         int upperIndex = (upper - cachedAddressTable.begin());
         bool inModel = (lower != upper);
-        AddressTableEntry::Type newEntryType = translateTransactionType(purpose, isMine);
+        // AQUI
+        //AddressTableEntry::Type newEntryType = translateTransactionType(purpose, isMine);
+        AddressTableEntry::Type newEntryType = AddressTableEntry::Stealth;
 
         switch(status)
         {
@@ -242,6 +267,8 @@ QVariant AddressTableModel::data(const QModelIndex &index, int role) const
             return Send;
         case AddressTableEntry::Receiving:
             return Receive;
+        case AddressTableEntry::Stealth:
+            return Stealth;
         default: break;
         }
     }
@@ -350,6 +377,21 @@ QModelIndex AddressTableModel::index(int row, int column, const QModelIndex &par
     }
 }
 
+/*void AddressTableModel::updateEntry(const QString &address, const QString &label, bool isMine, int status)
+{
+    // Update address book model from Bitcoin core
+    priv->updateEntry(address, label, isMine, status);
+} */
+
+
+void AddressTableModel::updateEntry(const QString &address, const QString &label)
+{
+    // Update stealth address book model from Bitcoin core
+    priv->updateEntry(address, label);
+}
+
+
+
 void AddressTableModel::updateEntry(const QString &address,
         const QString &label, bool isMine, const QString &purpose, int status)
 {
@@ -361,6 +403,8 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
 {
     std::string strLabel = label.toStdString();
     std::string strAddress = address.toStdString();
+    //CStealthAddress stealthAddressEntry;
+    CStealthAddress sxAddr;
 
     editStatus = OK;
 
@@ -402,17 +446,116 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
         }
         strAddress = CBitcoinAddress(newKey.GetID()).ToString();
     }
+    else if(type == Stealth)
+    {
+        // Generate a new address to associate with given label
+        WalletModel::UnlockContext ctx(walletModel->requestUnlock(true));
+        if(!ctx.isValid())
+        {
+            // Unlock wallet failed or was cancelled
+            editStatus = WALLET_UNLOCK_FAILURE;
+            return QString();
+        }
+        if (strLabel == "*"){
+            //editStatus = "Account wrong";
+            //editStatus = INVALID_ACCOUNT_NAME;
+            return QString();
+        }
+
+        
+        ec_secret scan_secret;
+        ec_secret spend_secret;
+
+        if (GenerateRandomSecret(scan_secret) != 0
+        || GenerateRandomSecret(spend_secret) != 0)
+        {
+             if (fDebug) printf("Error CWallet Generate Random");
+            return false;
+        };
+
+        /*ec_secret scanSecret;
+        ec_secret spendSecret;
+
+        for(unsigned int i=0; i<32; i++)
+        {
+            scanSecret.push_back(scan_secret);
+            spendSecret.push_back(spend_secret); 
+        }*/
+
+        ec_point scan_pubkey, spend_pubkey;
+
+        if (SecretToPublicKey(scan_secret, scan_pubkey) != 0)
+        {
+            //sError = "Could not get scan public key.";
+            // if (fDebug) printf("Error CWallet::NewStealthAddress - %s\n", sError.c_str());
+            return false;
+        };
+        
+        if (SecretToPublicKey(spend_secret, spend_pubkey) != 0)
+        {
+            //sError = "Could not get spend public key.";
+            // if (fDebug) printf("Error CWallet::NewStealthAddress - %s\n", sError.c_str());
+            return false;
+        };
+
+
+       
+
+        std::vector<uint8_t> vchScanSecret;
+        std::vector<uint8_t> vchSpendSecret;
+
+        
+        sxAddr.label = strLabel;
+        sxAddr.scan_pubkey = scan_pubkey;
+        //sxAddr.scan_pubkey = scan_secret;
+        sxAddr.spend_pubkey = spend_pubkey;
+        
+        sxAddr.scan_secret = vchScanSecret;
+        sxAddr.spend_secret = vchSpendSecret;
+
+        
+        
+
+        
+        sxAddr.options = 0;
+
+      /**  CStealthAddress sxAddr;
+        sxAddr.label = strLabel;
+        sxAddr.scan_pubkey = scan_pubkey;
+        sxAddr.spend_pubkey = spend_pubkey; */
+
+
+        /*Fspend_secretstealthAddressEntry.strAccount = strLabel;
+        stealthAddressEntry.scan_secret = scanSecret;
+        stealthAddressEntry.spend_secret = spendSecret; */
+        
+        //stealthAddressEntry.stealthAddress = sxAddr.Encoded();
+
+        //strAddress = sxAddr.Encoded();
+
+    }
     else
     {
         return QString();
     }
 
     // Add entry
-    {
+     {
+        if(type != Stealth){
+            LOCK(wallet->cs_wallet);
+            wallet->SetAddressBook(CBitcoinAddress(strAddress).Get(), strLabel,
+                               (type == Send ? "send" : "receive"));
+        }else{
+            //strAddress = addr.Encoded();
+            LOCK(wallet->cs_wallet);
+            wallet->AddStealthAddress(sxAddr);
+        }
+    }
+   /* {
         LOCK(wallet->cs_wallet);
         wallet->SetAddressBook(CBitcoinAddress(strAddress).Get(), strLabel,
                                (type == Send ? "send" : "receive"));
-    }
+    }  */
     return QString::fromStdString(strAddress);
 }
 
@@ -466,4 +609,15 @@ int AddressTableModel::lookupAddress(const QString &address) const
 void AddressTableModel::emitDataChanged(int idx)
 {
     emit dataChanged(index(idx, 0, QModelIndex()), index(idx, columns.length()-1, QModelIndex()));
+}
+
+
+void AddressTableModel::importStealthAddress()
+{
+    WalletModel::UnlockContext ctx(walletModel->requestUnlock(true));
+    if(!ctx.isValid())
+    {
+        return ;
+    }
+    //wallet->ImportStealthAddress();
 }

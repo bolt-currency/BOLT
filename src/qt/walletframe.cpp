@@ -131,6 +131,13 @@ void WalletFrame::gotoLoggerPage()
         i.value()->gotoLoggerPage();
 }
 
+void WalletFrame::gotoStealthAddressPage()
+{
+    QMap<QString, WalletView*>::const_iterator i;
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+        i.value()->gotoStealthAddressPage();
+}
+
 void WalletFrame::gotoBlockBrowser()
 {
     QMap<QString, WalletView*>::const_iterator i;

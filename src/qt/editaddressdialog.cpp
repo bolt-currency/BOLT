@@ -39,6 +39,10 @@ EditAddressDialog::EditAddressDialog(Mode mode, QWidget *parent) :
     case EditSendingAddress:
         setWindowTitle(tr("Edit sending address"));
         break;
+    case NewStealthAddress:
+        setWindowTitle(tr("New private address"));
+        ui->addressEdit->setEnabled(false);
+        break;
     }
 
     mapper = new QDataWidgetMapper(this);
@@ -79,6 +83,11 @@ bool EditAddressDialog::saveCurrentRow()
                 mode == NewSendingAddress ? AddressTableModel::Send : AddressTableModel::Receive,
                 ui->labelEdit->text(),
                 ui->addressEdit->text());
+        break;
+    case NewStealthAddress:
+        address = model->addRow(AddressTableModel::Stealth,
+                                ui->labelEdit->text(),
+                                ui->addressEdit->text());
         break;
     case EditReceivingAddress:
     case EditSendingAddress:

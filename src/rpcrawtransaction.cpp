@@ -627,23 +627,6 @@ Value signrawtransaction(const Array& params, bool fHelp)
             tempKeystore.AddKey(key);
         }
         
-        /*fGivenKeys = true;
-        Array keys = params[2].get_array();
-        BOOST_FOREACH(Value k, keys)
-        {
-            CKeyingMaterial vchSecret;
-            bool fGood = vchSecret.SetString(k.get_str());
-            if (!fGood)
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
-            /*CKey key = vchSecret.GetKey();
-            tempKeystore.AddKey(key); */
-/*
-            CKey key;
-            bool fCompressed;
-            CKeyingMaterial secret = vchSecret.GetSecret(fCompressed);
-            key.SetSecret(secret, fCompressed);
-            tempKeystore.AddKey(key);
-        } */
     }
 #ifdef ENABLE_WALLET
     else

@@ -2950,7 +2950,7 @@ https://www.transifex.com/projects/p/Bolt Wallet/</source>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="54"/>
         <source>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</source>
-        <translation>The address to send the payment to (e.g. BNf9eZmW28AV4rY95k4rAkMCu6ygWowSto)</translation>
+        <translation>The address to send the payment to Address or Private Address</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="61"/>

@@ -1515,7 +1515,7 @@ static const int64_t nAveragingTargetTimespan = nAveragingInterval * nTargetSpac
 static const int64_t nMaxAdjustDown = 3; // 3% adjustment down
 static const int64_t nMaxAdjustUp = 1; // 1% adjustment up
 
-static const int64_t nTargetTimespanAdjDown = nTargetTimespan * (100 + nMaxAdjustDown) / 100;
+//static const int64_t nTargetTimespanAdjDown = nTargetTimespan * (100 + nMaxAdjustDown) / 100;
 
 //
 // minimum amount of work that could possibly be required nTime after

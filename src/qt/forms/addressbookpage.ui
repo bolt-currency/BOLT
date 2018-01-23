@@ -93,6 +93,28 @@
        </property>
       </widget>
      </item>
+      <!--<item>
+      <widget class="QPushButton" name="newStealthAddress">
+       <property name="text">
+        <string>New private Address</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bolt.qrc">
+         <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="importStealthAddress">
+       <property name="text">
+        <string>Import private Address Transactions</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../bolt.qrc">
+         <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
+       </property>
+      </widget>
+     </item>-->
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

@@ -1928,7 +1928,7 @@ bool CWallet::ConvertList(std::vector<CTxIn> vCoins, std::vector<int64_t>& vecAm
 }
 
 bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend,
-                                CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl, AvailableCoinsType coin_type, bool useIX)
+                                CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet,int32_t& nChangePos, std::string& strFailReason, const CCoinControl* coinControl, AvailableCoinsType coin_type, bool useIX)
 {
     int64_t nValue = 0;
     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
@@ -2095,8 +2095,23 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend,
                     else
                     {
                         // Insert change txn at random position:
-                        vector<CTxOut>::iterator position = wtxNew.vout.begin()+GetRandInt(wtxNew.vout.size()+1);
+                        
+                        //vector<CTxOut>::iterator position = wtxNew.vout.begin()+GetRandInt(wtxNew.vout.size()+1);
+                        // Insert change txn at random position:
+                        vector<CTxOut>::iterator position = wtxNew.vout.begin()+GetRandInt(wtxNew.vout.size() + 1);
+                    
+                        if (position > wtxNew.vout.begin() && position < wtxNew.vout.end())
+                        {
+                            while (position > wtxNew.vout.begin())
+                            {
+                                if (position->nValue != 0)
+                                    break;
+                                position--;
+                            };
+                        };
+
                         wtxNew.vout.insert(position, newTxOut);
+                        nChangePos = std::distance(wtxNew.vout.begin(), position);
                     }
                 }
                 else
@@ -2149,6 +2164,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::strin
     vector< pair<CScript, int64_t> > vecSend;
     vecSend.push_back(make_pair(scriptPubKey, nValue));
 
+
     if (sNarr.length() > 0)
     {
         std::vector<uint8_t> vNarr(sNarr.c_str(), sNarr.c_str() + sNarr.length());
@@ -2166,10 +2182,10 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::strin
     // -- CreateTransaction won't place change between value and narr output.
     //    narration output will be for preceding output
 
-    //int nChangePos;
+    int32_t  nChangePos;
     std::string strFailReason;
 
-    bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl);
+    bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet,nChangePos, strFailReason, coinControl);
 
     if(!strFailReason.empty())
     {
@@ -2181,7 +2197,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, std::strin
 }
 
 // Call after CreateTransaction unless you want to abort
-bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand)
+bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand, bool isGuiClient)
 {
     {
         LOCK2(cs_main, cs_wallet);
@@ -2217,15 +2233,19 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std:
 
         // Track how many getdata requests our transaction gets
         mapRequestCount[wtxNew.GetHash()] = 0;
-        //bool f
+        
         // Broadcast
-        wtxNew.AcceptToMemoryPool(false);
-        /*if (!wtxNew.AcceptToMemoryPool(false))
-        {
-            // This must not fail. The transaction has already been signed and recorded.
-            LogPrintf("InternalCommitTransaction() : Error: Transaction not valid\n");
-            return false;
-        } */
+        if(!isGuiClient){
+            if (!wtxNew.AcceptToMemoryPool(false))
+            {
+                // This must not fail. The transaction has already been signed and recorded.
+                LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
+                return false;
+            } 
+        } else {
+            wtxNew.AcceptToMemoryPool(false);
+        }
+       
         LogPrintf("Before relay transaction %s\n", strCommand);
         wtxNew.RelayWalletTransaction(strCommand);
     }
@@ -2259,10 +2279,10 @@ string CWallet::SendMoney(CScript scriptPubKey, int64_t nValue, CWalletTx& wtxNe
     vecSend.push_back(make_pair(scriptPubKey, nValue));
 
     //printf("Value: %" PRIu64 "\n", nValue);
-
+    int32_t nChangePos;
     string strError = "";
 
-    if (!CreateTransaction(vecSend, wtxNew, reservekey, nFeeRequired, strError, coinControl, coin_type))
+    if (!CreateTransaction(vecSend, wtxNew, reservekey, nFeeRequired, nChangePos, strError, coinControl, coin_type))
     {
         if (nValue + nFeeRequired > GetBalance())
             strError = strprintf(_("Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!"), FormatMoney(nFeeRequired));
@@ -3409,10 +3429,10 @@ bool CWallet::CreateStealthTransaction(CScript scriptPubKey, int64_t nValue, std
     // -- shuffle inputs, change output won't mix enough as it must be not fully random for plantext narrations
     std::random_shuffle(vecSend.begin(), vecSend.end());
     
-    //int32_t nChangePos;
+    int32_t nChangePos;
     string strError;
-    //bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePos, strError, coinControl);
-    bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strError, coinControl);
+    bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePos, strError, coinControl);
+    //bool rv = CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strError, coinControl);
        
     return rv;
 }
