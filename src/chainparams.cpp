@@ -75,25 +75,13 @@ public:
         genesis.nNonce   = 3377645;
 
         hashGenesisBlock = genesis.GetHash();
-
-        /*printf("genesis = %s \n", hashGenesisBlock.ToString().c_str());
-        printf("merkle= %s \n", genesis.hashMerkleRoot.ToString().c_str());
-
-              while (hashGenesisBlock > bnProofOfWorkLimit.getuint256()){
-        if (++genesis.nNonce==0) break;
-        hashGenesisBlock = genesis.GetHash();
-        }
-        printf("%s\n GENESIS ", hashGenesisBlock.ToString().c_str());
-        printf("%s\n MERKLET ", genesis.hashMerkleRoot.ToString().c_str());
-        printf("%x\n MAIN ", bnProofOfWorkLimit.GetCompact());
-        printf("%d\n Nnouce ", genesis.nNonce);*/
-
-
-		
+	
         assert(hashGenesisBlock == uint256("000005d877c418653d4730772ecfa8c4bda57c85d1328d0db861aa9b8bf1a084"));
         assert(genesis.hashMerkleRoot == uint256("ae535bbec775955aca58d677aee8ebae31e79d82a2fd9275e6ce616fe18af6aa"));
 
         vSeeds.push_back(CDNSSeedData("Mainnet", "104.131.51.223"));
+        vSeeds.push_back(CDNSSeedData("Secondnet", "104.131.5.203"));
+        
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(26);                     // BOLT addresses start with 'X'
         base58Prefixes[SCRIPT_ADDRESS] = list_of(  4);                    // BOLT script addresses start with '7'
