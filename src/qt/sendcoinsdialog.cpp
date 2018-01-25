@@ -55,7 +55,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
     }
 
     ui->checkUseDarksend->setChecked(false);
-    ui->checkInstantX->setChecked(true);
+    ui->checkInstantX->setChecked(false);
 
     connect(ui->checkUseDarksend, SIGNAL(stateChanged ( int )), this, SLOT(updateDisplayUnit()));
     connect(ui->checkInstantX, SIGNAL(stateChanged ( int )), this, SLOT(updateInstantX()));
