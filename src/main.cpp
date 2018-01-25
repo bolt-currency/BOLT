@@ -1485,18 +1485,18 @@ int64_t GetBlockValue(int nBits, int nHeight, int64_t nFees)
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue)
 {
-    int64_t ret = blockValue / 100 * 40; //
+    int64_t ret = (blockValue / 100) * 40; //
 
-    if(nHeight > 150000+((576*30)* 3)) ret = blockValue / 100 * 45; // 209840 - 37.5% - 2018-4-26
-    if(nHeight > 150000+((576*30)* 4)) ret = blockValue / 100 * 45; // 227120 - 40.0% - 20185-27
-    if(nHeight > 150000+((576*30)* 5)) ret = blockValue / 100 * 45; // 244400 - 42.5% - 2018-6-30
-    if(nHeight > 150000+((576*30)* 6)) ret = blockValue / 100 * 60; // 261680 - 45.0% - 2018-7-01
-    if(nHeight > 150000+((576*30)* 7)) ret = blockValue / 100 * 60; // 278960 - 47.5% - 2018-8-01
-    if(nHeight > 150000+((576*30)* 9)) ret = blockValue / 100 * 60; // 313520 - 50.0% - 2018-9-03
-    if(nHeight > 150000+((576*30)*11)) ret = blockValue / 100 * 60; // 348080 - 52.5% - 2018-10-05
-    if(nHeight > 150000+((576*30)*13)) ret = blockValue / 100 * 60; // 382640 - 55.0% - 2018-11-07
-    if(nHeight > 150000+((576*30)*15)) ret = blockValue / 100 * 80; // 417200 - 57.5% - 2018-12-08
-    if(nHeight > 150000+((576*30)*17)) ret = blockValue / 100 * 80; // 451760 - 60.0% - 2019-1-11
+    if(nHeight > 150000+((576*30)* 3)) ret = (blockValue / 100) * 45; // 209840 - 37.5% - 2018-4-26
+    if(nHeight > 150000+((576*30)* 4)) ret = (blockValue / 100) * 45; // 227120 - 40.0% - 20185-27
+    if(nHeight > 150000+((576*30)* 5)) ret = (blockValue / 100) * 45; // 244400 - 42.5% - 2018-6-30
+    if(nHeight > 150000+((576*30)* 6)) ret = (blockValue / 100) * 60; // 261680 - 45.0% - 2018-7-01
+    if(nHeight > 150000+((576*30)* 7)) ret = (blockValue / 100) * 60; // 278960 - 47.5% - 2018-8-01
+    if(nHeight > 150000+((576*30)* 9)) ret = (blockValue / 100) * 60; // 313520 - 50.0% - 2018-9-03
+    if(nHeight > 150000+((576*30)*11)) ret = (blockValue / 100) * 60; // 348080 - 52.5% - 2018-10-05
+    if(nHeight > 150000+((576*30)*13)) ret = (blockValue / 100) * 60; // 382640 - 55.0% - 2018-11-07
+    if(nHeight > 150000+((576*30)*15)) ret = (blockValue / 100) * 80; // 417200 - 57.5% - 2018-12-08
+    if(nHeight > 150000+((576*30)*17)) ret = (blockValue / 100) * 80; // 451760 - 60.0% - 2019-1-11
 
     return ret;
 }
