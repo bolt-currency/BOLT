@@ -18,6 +18,9 @@ src/bolt-config.h.in
 src/build-aux/
 src/stamp-h1
 
+build/
+Bolt.app
+
 *.tar.gz
 
 share/setup.nsi

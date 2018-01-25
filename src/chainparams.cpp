@@ -50,7 +50,7 @@ public:
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0x7a;
         pchMessageStart[3] = 0x03;
-        vAlertPubKey = ParseHex("04c5788ca1e268a7474763fa965210b6fa6b04a45f52d21056c62fb19a2de991aa15aa1d1c516f34d2a0016f51a87959c89f51a148db30c839f71bc525dde8c480");
+        vAlertPubKey = ParseHex("9541788ca1e268a7474763fa965210b6fa6105a45f52d21056c62fb19a2de991aa15aa1d1c516f34d2a0016f51a87959c89f51a148db30c839f71bc525dde8c480");
 
         nDefaultPort = 11990;
         nRPCPort = 11991;
@@ -59,29 +59,28 @@ public:
         nSubsidyHalvingInterval = 700800; // 2 years
 
         // Genesis block
-        const char* pszTimestamp = "December 20, 2017: A new cryptocurrency was released in cryptomarket";
+        const char* pszTimestamp = "January 24, 2017: A new cryptocurrency was released in cryptomarket";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 16 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("08abcedf6ebadd4596964d890f677f8d2e74fdcc313c6416434384a66d6d8758d1c92de272dc6713e4a81d98841dfdfdc95e204ba915447d2fe9313435c78af3e8") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0124cedf6ebadd4596964d890f677f8d2e74fdcc313c6416434384a66d6d8758d1c92de272dc6713e4a81d98841dfdfdc95e204ba915447d2fe9313435c78af3e8") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nTime    = 1513776186;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 3377645;
+        genesis.nNonce   = 4727186;
 
         hashGenesisBlock = genesis.GetHash();
 	
-        assert(hashGenesisBlock == uint256("000005d877c418653d4730772ecfa8c4bda57c85d1328d0db861aa9b8bf1a084"));
-        assert(genesis.hashMerkleRoot == uint256("ae535bbec775955aca58d677aee8ebae31e79d82a2fd9275e6ce616fe18af6aa"));
+        assert(hashGenesisBlock == uint256("000001850318cbda4fbf1f2cdb72bf3458740f2ec77271391e4aed04e23a0255"));
+        assert(genesis.hashMerkleRoot == uint256("3094fb6d1615873184a995ff0563b3fbdc334ea650b14e87c2f717a1da121633"));
 
         vSeeds.push_back(CDNSSeedData("Mainnet", "104.131.51.223"));
-        vSeeds.push_back(CDNSSeedData("Secondnet", "104.131.5.203"));
-        
+        vSeeds.push_back(CDNSSeedData("Secondnet", "104.131.5.203"));        
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(26);                     // BOLT addresses start with 'X'
         base58Prefixes[SCRIPT_ADDRESS] = list_of(  4);                    // BOLT script addresses start with '7'
@@ -134,7 +133,7 @@ public:
         pchMessageStart[2] = 0x11;
         pchMessageStart[3] = 0x02;
 		
-        vAlertPubKey = ParseHex("08ti090a194381599d0f53f89ec60b9ec77f0e7b61978ef445142c8a4f1e154ca3441a5e46e12910540352edbd8af43fc1ee1da9a935c1c252fe7426c323d3d32");
+        vAlertPubKey = ParseHex("8895090a194381599d0f53f89ec60b9ec77f0e7b61978ef445142c8a4f1e154ca3441a5e46e12910540352edbd8af43fc1ee1da9a935c1c252fe7426c323d3d32");
 		
         nDefaultPort = 21990;
         nRPCPort = 21991;
@@ -143,13 +142,11 @@ public:
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1513776186;
-        genesis.nNonce   = 3377645;
+        genesis.nNonce   = 4727186;
 
         hashGenesisBlock = genesis.GetHash();
-
-       /* printf("merkle= %s\n", hashGenesisBlock.ToString().c_str());
-        printf("merkle= %s \n", genesis.hashMerkleRoot.ToString().c_str()); */
-        assert(hashGenesisBlock == uint256("000005d877c418653d4730772ecfa8c4bda57c85d1328d0db861aa9b8bf1a084"));
+        
+        assert(hashGenesisBlock == uint256("000001850318cbda4fbf1f2cdb72bf3458740f2ec77271391e4aed04e23a0255"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
