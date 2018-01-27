@@ -317,27 +317,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
 
         int nChangePos = -1;
         bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, nChangePos, strFailReason, coinControl, recipients[0].inputType, recipients[0].useInstantX);
-
-        /*std::map<int, std::string>::iterator it;
-        for (it = mapStealthNarr.begin(); it != mapStealthNarr.end(); ++it)
-        {
-            int pos = it->first;
-            if (nChangePos > -1 && it->first >= nChangePos)
-                pos++;
-
-            char key[64];
-            if (snprintf(key, sizeof(key), "n_%u", pos) < 1)
-            {
-                printf("CreateStealthTransaction(): Error creating narration key.");
-                continue;
-            };
-            newTx.mapValue[key] = it->second;
-        }; */
-
-
-        //bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, strFailReason, coinControl, recipients[0].inputType, recipients[0].useInstantX);
-        if(!wallet->CommitTransaction(*newTx, *keyChange, (recipients[0].useInstantX) ? "txlreq" : "tx", true))
-            transaction.setTransactionFee(nFeeRequired);
+        transaction.setTransactionFee(nFeeRequired);
 
         if(!fCreated)
         {
