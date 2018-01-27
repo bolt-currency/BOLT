@@ -2520,7 +2520,7 @@ int nChangePos;
     if (!fCreated)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
 
-    if (!pwalletMain->CommitTransaction(wtxNew, keyChange, (useInstantX ? "txlreq" : "tx")))
+    if (!pwalletMain->CommitTransaction(wtxNew, keyChange, (useInstantX) ? "txlreq" : "tx"))
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.");
 
 }

@@ -2233,18 +2233,13 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std:
 
         // Track how many getdata requests our transaction gets
         mapRequestCount[wtxNew.GetHash()] = 0;
-        
-        // Broadcast
-        if(!isGuiClient){
-            if (!wtxNew.AcceptToMemoryPool(false))
-            {
-                // This must not fail. The transaction has already been signed and recorded.
-                LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
-                return false;
-            } 
-        } else {
-            wtxNew.AcceptToMemoryPool(false);
-        }
+
+        if (!wtxNew.AcceptToMemoryPool(false))
+        {
+            // This must not fail. The transaction has already been signed and recorded.
+            LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
+            return false;
+        } 
        
         LogPrintf("Before relay transaction %s\n", strCommand);
         wtxNew.RelayWalletTransaction(strCommand);
