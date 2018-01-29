@@ -1,172 +1,377 @@
-ACLOCAL_AMFLAGS = -I src/m4
-SUBDIRS = src
-.PHONY: deploy
+include $(top_srcdir)/src/Makefile.include
 
-GZIP_ENV="-9n"
+AM_CPPFLAGS += -I$(top_srcdir)/src \
+  -I$(top_builddir)/src/qt \
+  -I$(top_builddir)/src/qt/forms \
+  $(PROTOBUF_CFLAGS) \
+  $(QR_CFLAGS)
+bin_PROGRAMS = bolt-qt
+noinst_LIBRARIES = libboltqt.a
+SUBDIRS = . $(BUILD_TEST_QT)
+DIST_SUBDIRS = . test
 
-BITCOIND_BIN=$(top_builddir)/src/boltdd$(EXEEXT)
-BITCOIN_QT_BIN=$(top_builddir)/src/qt/boltd-qt$(EXEEXT)
-BITCOIN_CLI_BIN=$(top_builddir)/src/boltd-cli$(EXEEXT)
-BITCOIN_WIN_INSTALLER=$(PACKAGE)-$(PACKAGE_VERSION)-win$(WINDOWS_BITS)-setup$(EXEEXT)
+# bolt qt core #
+QT_TS = \
+  locale/bolt_bar.ts \
+  locale/bolt_bg.ts \
+  locale/bolt_ca.ts \
+  locale/bolt_cmn.ts \
+  locale/bolt_cs.ts \
+  locale/bolt_da.ts \
+  locale/bolt_de.ts \
+  locale/bolt_el.ts \
+  locale/bolt_en.ts \
+  locale/bolt_eo.ts \
+  locale/bolt_es.ts \
+  locale/bolt_fi.ts \
+  locale/bolt_fr.ts \
+  locale/bolt_hu_HU.ts \
+  locale/bolt_it.ts \
+  locale/bolt_lv_LV.ts \
+  locale/bolt_nb.ts \
+  locale/bolt_nl.ts \
+  locale/bolt_pl.ts \
+  locale/bolt_pt.ts \
+  locale/bolt_pt_BR.ts \
+  locale/bolt_ru.ts \
+  locale/bolt_sk.ts \
+  locale/bolt_sv.ts \
+  locale/bolt_tr.ts \
+  locale/bolt_vi.ts \
+  locale/bolt_zh_CN.ts \
+  locale/bolt_zh_HK.ts
 
-OSX_APP=boltd-Qt.app
-OSX_DMG=boltd-Qt.dmg
-OSX_DEPLOY_SCRIPT=$(top_srcdir)/contrib/macdeploy/macdeployqtplus
-OSX_FANCY_PLIST=$(top_srcdir)/contrib/macdeploy/fancy.plist
-OSX_INSTALLER_ICONS=$(top_srcdir)/src/qt/res/icons/bitcoin.icns
-OSX_PLIST=$(top_srcdir)/share/qt/Info.plist #not installed
-OSX_QT_TRANSLATIONS = da,de,es,hu,ru,uk,zh_CN,zh_TW
+QT_FORMS_UI = \
+  forms/aboutdialog.ui \
+  forms/addressbookpage.ui \
+  forms/blockbrowser.ui \
+  forms/askpassphrasedialog.ui \
+  forms/coincontroldialog.ui \
+  forms/darksendconfig.ui \
+  forms/editaddressdialog.ui \
+  forms/helpmessagedialog.ui \
+  forms/intro.ui \
+  forms/openuridialog.ui \
+  forms/optionsdialog.ui \
+  forms/overviewpage.ui \
+  forms/receivecoinsdialog.ui \
+  forms/receiverequestdialog.ui \
+  forms/rpcconsole.ui \
+  forms/sendcoinsdialog.ui \
+  forms/sendcoinsentry.ui \
+  forms/signverifymessagedialog.ui \
+  forms/transactiondescdialog.ui \
+  forms/masternodelist.ui
 
-DIST_DOCS = $(wildcard doc/*.md) $(wildcard doc/release-notes/*.md)
+QT_MOC_CPP = \
+  moc_addressbookpage.cpp \
+  moc_addresstablemodel.cpp \
+  moc_blockbrowser.cpp \
+  moc_askpassphrasedialog.cpp \
+  moc_bitcoinaddressvalidator.cpp \
+  moc_bitcoinamountfield.cpp \
+  moc_bitcoingui.cpp \
+  moc_bitcoinunits.cpp \
+  moc_clientmodel.cpp \
+  moc_coincontroldialog.cpp \
+  moc_coincontroltreewidget.cpp \
+  moc_csvmodelwriter.cpp \
+  moc_darksendconfig.cpp \
+  moc_editaddressdialog.cpp \
+  moc_guiutil.cpp \
+  moc_intro.cpp \
+  moc_macdockiconhandler.cpp \
+  moc_macnotificationhandler.cpp \
+  moc_monitoreddatamapper.cpp \
+  moc_notificator.cpp \
+  moc_openuridialog.cpp \
+  moc_optionsdialog.cpp \
+  moc_optionsmodel.cpp \
+  moc_overviewpage.cpp \
+  moc_paymentserver.cpp \
+  moc_qvalidatedlineedit.cpp \
+  moc_qvaluecombobox.cpp \
+  moc_receivecoinsdialog.cpp \
+  moc_receiverequestdialog.cpp \
+  moc_recentrequeststablemodel.cpp \
+  moc_rpcconsole.cpp \
+  moc_sendcoinsdialog.cpp \
+  moc_sendcoinsentry.cpp \
+  moc_signverifymessagedialog.cpp \
+  moc_splashscreen.cpp \
+  moc_trafficgraphwidget.cpp \
+  moc_transactiondesc.cpp \
+  moc_transactiondescdialog.cpp \
+  moc_transactionfilterproxy.cpp \
+  moc_transactiontablemodel.cpp \
+  moc_transactionview.cpp \
+  moc_utilitydialog.cpp \
+  moc_walletframe.cpp \
+  moc_walletmodel.cpp \
+  moc_walletview.cpp \
+  moc_masternodelist.cpp \
+  moc_bantablemodel.cpp \
+  moc_peertablemodel.cpp
 
-WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/bitcoin.ico \
-  $(top_srcdir)/share/pixmaps/nsis-header.bmp \
-  $(top_srcdir)/share/pixmaps/nsis-wizard.bmp \
-  $(top_srcdir)/doc/README_windows.txt
+BITCOIN_MM = \
+  macdockiconhandler.mm \
+  macnotificationhandler.mm
 
-OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_FANCY_PLIST) $(OSX_INSTALLER_ICONS) \
-  $(top_srcdir)/contrib/macdeploy/background.png \
-  $(top_srcdir)/contrib/macdeploy/DS_Store
+QT_MOC = \
+  bolt.moc \
+  intro.moc \
+  overviewpage.moc \
+  rpcconsole.moc
 
-COVERAGE_INFO = baseline_filtered_combined.info baseline.info block_test.info \
-  leveldb_baseline.info test_boltd_filtered.info total_coverage.info \
-  baseline_filtered.info block_test_filtered.info \
-  leveldb_baseline_filtered.info test_boltd_coverage.info test_boltd.info
+QT_QRC = bolt.qrc
 
-dist-hook:
-	-$(MAKE) -C $(top_distdir)/src/leveldb clean
-	-$(GIT) archive --format=tar HEAD -- src/version.cpp | $(AMTAR) -C $(top_distdir) -xf -
+PROTOBUF_CC = paymentrequest.pb.cc
+PROTOBUF_H = paymentrequest.pb.h
+PROTOBUF_PROTO = paymentrequest.proto
 
-distcheck-hook:
-	$(MKDIR_P) $(top_distdir)/_build/src/leveldb
-	cp -rf $(top_srcdir)/src/leveldb/* $(top_distdir)/_build/src/leveldb/
-	-$(MAKE) -C $(top_distdir)/_build/src/leveldb clean
+BITCOIN_QT_H = \
+  addressbookpage.h \
+  addresstablemodel.h \
+  askpassphrasedialog.h \
+  bitcoinaddressvalidator.h \
+  bitcoinamountfield.h \
+  bitcoingui.h \
+  bitcoinunits.h \
+  clientmodel.h \
+  coincontroldialog.h \
+  coincontroltreewidget.h \
+  csvmodelwriter.h \
+  darksendconfig.h \
+  editaddressdialog.h \
+  guiconstants.h \
+  guiutil.h \
+  intro.h \
+  macdockiconhandler.h \
+  macnotificationhandler.h \
+  monitoreddatamapper.h \
+  notificator.h \
+  openuridialog.h \
+  optionsdialog.h \
+  optionsmodel.h \
+  overviewpage.h \
+  paymentrequestplus.h \
+  paymentserver.h \
+  qvalidatedlineedit.h \
+  qvaluecombobox.h \
+  receivecoinsdialog.h \
+  receiverequestdialog.h \
+  recentrequeststablemodel.h \
+  rpcconsole.h \
+  sendcoinsdialog.h \
+  sendcoinsentry.h \
+  signverifymessagedialog.h \
+  splashscreen.h \
+  trafficgraphwidget.h \
+  transactiondesc.h \
+  transactiondescdialog.h \
+  transactionfilterproxy.h \
+  transactionrecord.h \
+  transactiontablemodel.h \
+  transactionview.h \
+  utilitydialog.h \
+  walletframe.h \
+  walletmodel.h \
+  walletmodeltransaction.h \
+  walletview.h \
+  winshutdownmonitor.h \
+  masternodelist.h \
+  bantablemodel.h \
+  peertablemodel.h
 
-distcleancheck:
-	@:
+RES_ICONS = \
+  res/icons/add.png \
+  res/icons/address-book.png \
+  res/icons/address-book2.png \
+  res/icons/bitcoin.ico \
+  res/icons/bitcoin.png \
+  res/icons/bitcoin_testnet.ico \
+  res/icons/bitcoin_testnet.png \
+  res/icons/browse.png \
+  res/icons/clock1.png \
+  res/icons/clock2.png \
+  res/icons/clock3.png \
+  res/icons/clock4.png \
+  res/icons/clock5.png \
+  res/icons/configfile.png \
+  res/icons/configure.png \
+  res/icons/connect0.png \
+  res/icons/connect1.png \
+  res/icons/connect2.png \
+  res/icons/connect3.png \
+  res/icons/connect4.png \
+  res/icons/debugwindow.png \
+  res/icons/edit.png \
+  res/icons/editcopy.png \
+  res/icons/editpaste.png \
+  res/icons/export.png \
+  res/icons/filesave.png \
+  res/icons/history.png \
+  res/icons/info.png \
+  res/icons/key.png \
+  res/icons/lock_closed.png \
+  res/icons/lock_open.png \
+  res/icons/masternode.png \
+  res/icons/network.png \
+  res/icons/open.png \
+  res/icons/overview.png \
+  res/icons/qrcode.png \
+  res/icons/quit.png \
+  res/icons/receive.png \
+  res/icons/remove.png \
+  res/icons/send.png \
+  res/icons/sign.png \
+  res/icons/synced.png \
+  res/icons/toolbar.png \
+  res/icons/toolbar_testnet.png \
+  res/icons/transactions.png \
+  res/icons/transaction0.png \
+  res/icons/transaction2.png \
+  res/icons/transaction_conflicted.png \
+  res/icons/tx_inout.png \
+  res/icons/tx_input.png \
+  res/icons/tx_output.png \
+  res/icons/tx_mined.png \
+  res/icons/verify.png \
+  res/icons/websearch.png
 
-$(BITCOIN_WIN_INSTALLER): $(BITCOIND_BIN) $(BITCOIN_QT_BIN) $(BITCOIN_CLI_BIN)
-	$(MKDIR_P) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(BITCOIND_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(BITCOIN_QT_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(BITCOIN_CLI_BIN) $(top_builddir)/release
-	@test -f $(MAKENSIS) && $(MAKENSIS) $(top_builddir)/share/setup.nsi || \
-	  echo error: could not build $@
 
-$(BITCOIND_BIN) $(BITCOIN_QT_BIN) $(BITCOIN_CLI_BIN):
-	make -C $(dir $@) $(notdir $@)
+BITCOIN_QT_CPP = \
+  bolt.cpp \
+  bitcoinaddressvalidator.cpp \
+  bitcoinamountfield.cpp \
+  bitcoingui.cpp \
+  bitcoinunits.cpp \
+  clientmodel.cpp \
+  csvmodelwriter.cpp \
+  darksendconfig.cpp \
+  guiutil.cpp \
+  intro.cpp \
+  monitoreddatamapper.cpp \
+  notificator.cpp \
+  optionsdialog.cpp \
+  optionsmodel.cpp \
+  qvalidatedlineedit.cpp \
+  qvaluecombobox.cpp \
+  rpcconsole.cpp \
+  splashscreen.cpp \
+  trafficgraphwidget.cpp \
+  utilitydialog.cpp \
+  winshutdownmonitor.cpp
 
-$(OSX_APP)/Contents/PkgInfo:
-	$(MKDIR_P) $(@D)
-	@echo "APPL????" > $@
-
-$(OSX_APP)/Contents/Resources/empty.lproj:
-	$(MKDIR_P) $(@D)
-	@touch $@
-
-$(OSX_APP)/Contents/Info.plist: $(OSX_PLIST)
-	$(MKDIR_P) $(@D)
-	$(INSTALL_DATA) $< $@
-
-$(OSX_APP)/Contents/Resources/bitcoin.icns: $(OSX_INSTALLER_ICONS)
-	$(MKDIR_P) $(@D)
-	$(INSTALL_DATA) $< $@
-
-$(OSX_APP)/Contents/MacOS/boltd-Qt: $(BITCOIN_QT_BIN)
-	$(MKDIR_P) $(@D)
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $< $@
-
-OSX_APP_BUILT=$(OSX_APP)/Contents/PkgInfo $(OSX_APP)/Contents/Resources/empty.lproj \
-  $(OSX_APP)/Contents/Resources/bitcoin.icns $(OSX_APP)/Contents/Info.plist \
-  $(OSX_APP)/Contents/MacOS/boltd-Qt
-
-if BUILD_DARWIN
-$(OSX_DMG): $(OSX_APP_BUILT) $(OSX_PACKAGING)
-	$(OSX_DEPLOY_SCRIPT) $(OSX_APP) -add-qt-tr $(OSX_QT_TRANSLATIONS) -dmg -fancy $(OSX_FANCY_PLIST) -verbose 2
-
-else
-$(OSX_DMG): $(OSX_APP_BUILT) $(OSX_PACKAGING)
-	INSTALLNAMETOOL=$(INSTALLNAMETOOL)  OTOOL=$(OTOOL) STRIP=$(STRIP) $(OSX_DEPLOY_SCRIPT) $(OSX_APP) -add-qt-tr $(OSX_QT_TRANSLATIONS) -verbose 2
-	$(MKDIR_P) dist/.background
-	$(INSTALL) contrib/macdeploy/background.png dist/.background
-	$(INSTALL) contrib/macdeploy/DS_Store dist/.DS_Store
-	cd dist; $(LN_S) /Applications Applications
-	$(GENISOIMAGE) -no-cache-inodes -l -probe -V "boltd-Qt" -no-pad -r -apple -o $@ dist
+if ENABLE_WALLET
+BITCOIN_QT_CPP += \
+  addressbookpage.cpp \
+  blockbrowser.cpp \
+  addresstablemodel.cpp \
+  askpassphrasedialog.cpp \
+  coincontroldialog.cpp \
+  coincontroltreewidget.cpp \
+  darksendconfig.cpp \
+  editaddressdialog.cpp \
+  openuridialog.cpp \
+  overviewpage.cpp \
+  paymentrequestplus.cpp \
+  paymentserver.cpp \
+  receivecoinsdialog.cpp \
+  receiverequestdialog.cpp \
+  recentrequeststablemodel.cpp \
+  sendcoinsdialog.cpp \
+  sendcoinsentry.cpp \
+  signverifymessagedialog.cpp \
+  transactiondesc.cpp \
+  transactiondescdialog.cpp \
+  transactionfilterproxy.cpp \
+  transactionrecord.cpp \
+  transactiontablemodel.cpp \
+  transactionview.cpp \
+  walletframe.cpp \
+  walletmodel.cpp \
+  walletmodeltransaction.cpp \
+  walletview.cpp \
+  masternodelist.cpp \
+  bantablemodel.cpp \
+  peertablemodel.cpp
 endif
 
+RES_IMAGES = \
+  res/images/boltimg.png \
+  res/images/splash.png \
+  res/images/splash_testnet.png \
+  res/images/bolt.png \
+  res/images/drkblue_downArrow.png \
+  res/images/drkblue_downArrow_small.png \
+  res/images/drkblue_upArrow_small.png \
+  res/images/drkblue_leftArrow_small.png \
+  res/images/drkblue_rightArrow_small.png \
+  res/images/drkblue_qtreeview_selected.png \
+  res/images/drkblue_walletFrame_bg.png \
+  res/images/drkblue_walletFrame.png
+
+RES_CSS = \
+  res/css/drkblue.css
+  
+RES_MOVIES = $(wildcard res/movies/spinner-*.png)
+
+BOLT_RC = res/bolt-qt-res.rc
+
+libboltqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(QT_INCLUDES) \
+  -I$(top_srcdir)/src/qt/forms $(QT_DBUS_INCLUDES)
+libboltqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_CSS)
+
+nodist_libboltqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP)
+
+BUILT_SOURCES = $(nodist_libboltqt_a_SOURCES)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# bolt-qt binary #
+bolt_qt_CPPFLAGS = $(AM_CPPFLAGS) $(QT_INCLUDES) \
+  -I$(top_srcdir)/src/qt/forms
+bolt_qt_SOURCES = bolt.cpp
 if TARGET_DARWIN
-appbundle: $(OSX_APP_BUILT)
-deploy: $(OSX_DMG)
+  bolt_qt_SOURCES += $(BITCOIN_MM)
 endif
 if TARGET_WINDOWS
-deploy: $(BITCOIN_WIN_INSTALLER)
+  bolt_qt_SOURCES += $(BOLT_RC)
 endif
-
-if USE_LCOV
-
-baseline.info:
-	$(LCOV) -c -i -d $(abs_builddir)/src -o $@
-
-baseline_filtered.info: baseline.info
-	$(LCOV) -r $< "/usr/include/*" -o $@
-
-leveldb_baseline.info: baseline_filtered.info
-	$(LCOV) -c -i -d $(abs_builddir)/src/leveldb -b $(abs_builddir)/src/leveldb -o $@
-
-leveldb_baseline_filtered.info: leveldb_baseline.info
-	$(LCOV) -r $< "/usr/include/*" -o $@
-
-baseline_filtered_combined.info: leveldb_baseline_filtered.info baseline_filtered.info
-	$(LCOV) -a leveldb_baseline_filtered.info -a baseline_filtered.info -o $@
-
-test_boltd.info: baseline_filtered_combined.info
-	$(MAKE) -C src/ check
-	$(LCOV) -c -d $(abs_builddir)/src -t test_boltd -o $@
-	$(LCOV) -z -d $(abs_builddir)/src
-	$(LCOV) -z -d $(abs_builddir)/src/leveldb
-
-test_boltd_filtered.info: test_boltd.info
-	$(LCOV) -r $< "/usr/include/*" -o $@
-
-block_test.info: test_boltd_filtered.info
-	$(MKDIR_P) qa/tmp
-	-@TIMEOUT=15 qa/pull-tester/run-bitcoind-for-test.sh $(JAVA) -jar $(JAVA_COMPARISON_TOOL) qa/tmp/compTool 0
-	$(LCOV) -c -d $(abs_builddir)/src --t BitcoinJBlockTest -o $@
-	$(LCOV) -z -d $(abs_builddir)/src
-	$(LCOV) -z -d $(abs_builddir)/src/leveldb
-
-block_test_filtered.info: block_test.info
-	$(LCOV) -r $< "/usr/include/*" -o $@
-
-test_boltd_coverage.info: baseline_filtered_combined.info test_boltd_filtered.info
-	$(LCOV) -a baseline_filtered.info -a leveldb_baseline_filtered.info -a test_boltd_filtered.info -o $@
-
-total_coverage.info:  baseline_filtered_combined.info test_boltd_filtered.info block_test_filtered.info
-	$(LCOV) -a baseline_filtered.info -a leveldb_baseline_filtered.info -a test_boltd_filtered.info -a block_test_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
-
-test_boltd.coverage/.dirstamp:  test_boltd_coverage.info
-	$(GENHTML) -s $< -o $(@D)
-	@touch $@
-
-total.coverage/.dirstamp: total_coverage.info
-	$(GENHTML) -s $< -o $(@D)
-	@touch $@
-
-cov: test_boltd.coverage/.dirstamp total.coverage/.dirstamp
-
+bolt_qt_LDADD = libboltqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+bolt_qt_LDADD += $(LIBBITCOIN_WALLET)
 endif
+bolt_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBLEVELDB) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+bolt_qt_LDFLAGS = $(QT_LDFLAGS)
 
-if USE_COMPARISON_TOOL
-check-local:
-	$(MKDIR_P) qa/tmp
-	@qa/pull-tester/run-bitcoind-for-test.sh $(JAVA) -jar $(JAVA_COMPARISON_TOOL) qa/tmp/compTool $(COMPARISON_TOOL_REORG_TESTS)
-endif
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
 
-EXTRA_DIST = $(top_srcdir)/share/genbuild.sh qa/pull-tester/pull-tester.sh qa/rpc-tests $(DIST_DOCS) $(WINDOWS_PACKAGING) $(OSX_PACKAGING)
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
 
-CLEANFILES = $(OSX_DMG) $(BITCOIN_WIN_INSTALLER)
+.PHONY: FORCE
+.SECONDARY: $(QT_QM)
 
-.INTERMEDIATE: $(COVERAGE_INFO)
+boltstrings.cpp: FORCE
+	$(MAKE) -C $(top_srcdir)/src qt/boltstrings.cpp
 
-clean-local:
-	rm -rf test_chaincoin.coverage/ total.coverage/ $(OSX_APP)
+translate: boltstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	@QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts locale/bolt_en.ts
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_QM) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(RES_CSS) $(PROTOBUF_H)
+	@cd $(abs_srcdir); test -f $(RCC) && QT_SELECT=$(QT_SELECT) $(RCC) -name bolt -o $(abs_builddir)/$@ $< || \
+	  echo error: could not build $@
+	$(SED) -e '/^\*\*.*Created:/d' $@ > $@.n && mv $@{.n,}
+	$(SED) -e '/^\*\*.*by:/d' $@  > $@.n && mv $@{.n,}
+
+CLEANFILES = $(BUILT_SOURCES) $(QT_QM) $(QT_FORMS_H) *.gcda *.gcno
