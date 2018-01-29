@@ -53,7 +53,6 @@ private:
     QMenu *contextMenu;
     int64_t nTimeFilterUpdated;
     bool fFilterUpdated;
-    bool bAutostartMissing = false;
 
 public Q_SLOTS:
     void updateMyMasternodeInfo(QString strAlias, QString strAddr, CMasternode *info);

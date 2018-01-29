@@ -284,10 +284,7 @@ void MasternodeList::updateMyNodeList(bool fForce)
         CTxIn txin = CTxIn(uint256(mne.getTxHash()), nOutputIndex);
 
         CMasternode *infoMn = mnodeman.Find(txin);
-        if (!infoMn && bAutostartMissing) {
-            //StartMasternodes(MnCommand::StartMissing);
-            return;
-        }
+
 
         updateMyMasternodeInfo(QString::fromStdString(mne.getAlias()), QString::fromStdString(mne.getIp()), infoMn);
     }
@@ -473,5 +470,5 @@ void MasternodeList::on_UpdateButton_clicked()
 
 void MasternodeList::on_cbxAutoStartMissingMNs_stateChanged(int arg1)
 {
-    this->bAutostartMissing = ui->cbxAutoStartMissingMNs->isChecked();
+    
 }
