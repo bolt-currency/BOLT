@@ -29,7 +29,8 @@ BITCOIN_CORE_H = \
   addrman.h \
   alert.h \
   allocators.h \
-  base58.h bignum.h \
+  base58.h 
+  bignum.h \
   bloom.h \
   chainparams.h \
   checkpoints.h \
@@ -161,7 +162,7 @@ libbolt_common_a_SOURCES = \
   util.cpp \
   version.cpp \
   spork.cpp \
-  blake.c \
+  algorithm/blake.c \
   lz4/lz4.c \
   $(BITCOIN_CORE_H)
 
