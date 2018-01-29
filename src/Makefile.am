@@ -82,6 +82,7 @@ BITCOIN_CORE_H = \
   util.h \
   version.h \
   walletdb.h \
+  lz4/lz4.h \
   wallet.h
 
 JSON_H = \
