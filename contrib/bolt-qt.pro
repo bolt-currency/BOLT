@@ -7,7 +7,7 @@ HEADERS += \
     ../src/allocators.h \
     ../src/base58.h \
     ../src/bignum.h \
-    ../src/dash-config.h \
+    ../src/bolt-config.h \
     ../src/bloom.h \
     ../src/chainparams.h \
     ../src/checkpoints.h \
@@ -29,6 +29,7 @@ HEADERS += \
     ../src/leveldbwrapper.h \
     ../src/limitedmap.h \
     ../src/main.h \
+    ../src/stealth.h \
     ../src/masternode.h \
     ../src/masternodeconfig.h \
     ../src/miner.h \
@@ -42,17 +43,7 @@ HEADERS += \
     ../src/rpcserver.h \
     ../src/script.h \
     ../src/serialize.h \
-    ../src/sph_blake.h \
-    ../src/sph_bmw.h \
-    ../src/sph_cubehash.h \
-    ../src/sph_echo.h \
-    ../src/sph_groestl.h \
-    ../src/sph_jh.h \
-    ../src/sph_keccak.h \
-    ../src/sph_luffa.h \
-    ../src/sph_shavite.h \
-    ../src/sph_simd.h \
-    ../src/sph_skein.h \
+    ../src/algorithm/sph_blake.h \
     ../src/sph_types.h \
     ../src/sync.h \
     ../src/threadsafety.h \
@@ -122,35 +113,27 @@ HEADERS += \
 SOURCES += \
     ../src/activemasternode.cpp \
     ../src/addrman.cpp \
-    ../src/aes_helper.c \
     ../src/alert.cpp \
     ../src/allocators.cpp \
     ../src/base58.cpp \
-    ../src/blake.c \
+    ../src/algorithm/blake.c \
     ../src/bloom.cpp \
-    ../src/bmw.c \
     ../src/chainparams.cpp \
     ../src/checkpoints.cpp \
     ../src/coins.cpp \
     ../src/core.cpp \
     ../src/crypter.cpp \
-    ../src/cubehash.c \
-    ../src/dash-cli.cpp \
-    ../src/dashd.cpp \
+    ../src/bolt-cli.cpp \
+    ../src/bolt.cpp \
     ../src/darksend.cpp \
     ../src/db.cpp \
-    ../src/echo.c \
-    ../src/groestl.c \
     ../src/hash.cpp \
     ../src/init.cpp \
     ../src/instantx.cpp \
-    ../src/jh.c \
-    ../src/keccak.c \
     ../src/keepass.cpp \
     ../src/key.cpp \
     ../src/keystore.cpp \
     ../src/leveldbwrapper.cpp \
-    ../src/luffa.c \
     ../src/main.cpp \
     ../src/masternode.cpp \
     ../src/masternodeconfig.cpp \
@@ -170,10 +153,7 @@ SOURCES += \
     ../src/rpcrawtransaction.cpp \
     ../src/rpcserver.cpp \
     ../src/rpcwallet.cpp \
-    ../src/script.cpp \
-    ../src/shavite.c \
-    ../src/simd.c \
-    ../src/skein.c \
+    ../src/stealth.cpp \
     ../src/sync.cpp \
     ../src/txdb.cpp \
     ../src/txmempool.cpp \
@@ -213,7 +193,7 @@ SOURCES += \
     ../src/test/serialize_tests.cpp \
     ../src/test/sighash_tests.cpp \
     ../src/test/sigopcount_tests.cpp \
-    ../src/test/test_dash.cpp \
+    ../src/test/test_bolt.cpp \
     ../src/test/transaction_tests.cpp \
     ../src/test/uint256_tests.cpp \
     ../src/test/util_tests.cpp \
@@ -224,13 +204,13 @@ SOURCES += \
     ../src/qt/bitcoinaddressvalidator.cpp \
     ../src/qt/bitcoinamountfield.cpp \
     ../src/qt/bitcoingui.cpp \
-    ../src/qt/dashstrings.cpp \
+    ../src/qt/boltstrings.cpp \
     ../src/qt/bitcoinunits.cpp \
     ../src/qt/clientmodel.cpp \
     ../src/qt/coincontroldialog.cpp \
     ../src/qt/coincontroltreewidget.cpp \
     ../src/qt/csvmodelwriter.cpp \
-    ../src/qt/dash.cpp \
+    ../src/qt/bolt.cpp \
     ../src/qt/darksendconfig.cpp \
     ../src/qt/editaddressdialog.cpp \
     ../src/qt/guiutil.cpp \
@@ -288,7 +268,7 @@ SOURCES += \
     ../src/qt/paymentrequest.pb.cc \
     ../src/qt/paymentrequestplus.cpp \
     ../src/qt/paymentserver.cpp \
-    ../src/qt/qrc_dash.cpp \
+    ../src/qt/qrc_bolt.cpp \
     ../src/qt/qvalidatedlineedit.cpp \
     ../src/qt/qvaluecombobox.cpp \
     ../src/qt/receivecoinsdialog.cpp \
@@ -339,4 +319,4 @@ FORMS += \
     ../src/qt/forms/transactiondescdialog.ui
 
 RESOURCES += \
-    ../src/qt/dash.qrc
+    ../src/qt/bolt.qrc
