@@ -68,17 +68,7 @@ BITCOIN_CORE_H = \
   rpcserver.h \
   script.h \
   serialize.h \
-  sph_blake.h \
-  sph_bmw.h \
-  sph_cubehash.h \
-  sph_echo.h \
-  sph_groestl.h \
-  sph_jh.h \
-  sph_keccak.h \
-  sph_luffa.h \
-  sph_shavite.h \
-  sph_simd.h \
-  sph_skein.h \
+  algorithm/sph_blake.h \
   sph_types.h \
   spork.h \
   sync.h \
