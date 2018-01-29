@@ -171,7 +171,7 @@ libbolt_common_a_SOURCES = \
   util.cpp \
   version.cpp \
   spork.cpp \
-  algorithm/blake.c \
+  blake.c \
   lz4/lz4.c \
   $(BITCOIN_CORE_H)
 

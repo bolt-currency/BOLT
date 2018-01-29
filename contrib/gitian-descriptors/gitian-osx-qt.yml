@@ -12,14 +12,14 @@ packages:
 reference_datetime: "2013-06-01 00:00:00"
 remotes: []
 files:
-- "qt-everywhere-opensource-src-5.2.1.tar.gz"
+- "qt-everywhere-opensource-src-4.6.4.tar.gz"
 - "osx-native-depends-r3.tar.gz"
 - "osx-depends-r7.tar.gz"
 - "MacOSX10.7.sdk.tar.gz"
 
 script: |
 
-  echo "84e924181d4ad6db00239d87250cc89868484a14841f77fb85ab1f1dbdcd7da1  qt-everywhere-opensource-src-5.2.1.tar.gz" | sha256sum -c
+  echo "84e924181d4ad6db00239d87250cc89868484a14841f77fb85ab1f1dbdcd7da1  qt-everywhere-opensource-src-4.6.4.tar.gz" | sha256sum -c
 
   REVISION=r6
   export SOURCES_PATH=`pwd`
@@ -75,8 +75,8 @@ script: |
   export PATH=`pwd`/native-prefix/bin:$PATH
   tar xf /home/ubuntu/build/osx-depends-r7.tar.gz
 
-  SOURCE_FILE=${SOURCES_PATH}/qt-everywhere-opensource-src-5.2.1.tar.gz
-  BUILD_DIR=${BUILD_BASE}/qt-everywhere-opensource-src-5.2.1
+  SOURCE_FILE=${SOURCES_PATH}/qt-everywhere-opensource-src-4.6.4.tar.gz
+  BUILD_DIR=${BUILD_BASE}/qt-everywhere-opensource-src-4.6.4
 
 
   tar -C ${BUILD_BASE} -xf ${SOURCE_FILE}
@@ -181,6 +181,6 @@ script: |
   find ${PREFIX}/lib -name "*.prl" -delete
 
   export GZIP="-9n"
-  find native-prefix prefix | sort | tar --no-recursion -czf osx-depends-qt-5.2.1-${REVISION}.tar.gz -T -
+  find native-prefix prefix | sort | tar --no-recursion -czf osx-depends-qt-4.6.4-${REVISION}.tar.gz -T -
 
-  mv osx-depends-qt-5.2.1-${REVISION}.tar.gz $OUTDIR
+  mv osx-depends-qt-4.6.4-${REVISION}.tar.gz $OUTDIR
