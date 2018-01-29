@@ -35,9 +35,11 @@
         <file alias="filesave">res/icons/filesave.png</file>
         <file alias="qrcode">res/icons/qrcode.png</file>
         <file alias="debugwindow">res/icons/debugwindow.png</file>
+        <file alias="stealth_addresses">res/icons/stealth.png</file>
         <file alias="browse">res/icons/browse.png</file>
         <file alias="websearch">res/icons/websearch.png</file>
         <file alias="masternode">res/icons/masternode.png</file>
+        <file alias="explorer">res/icons/search.png</file>
         <file alias="transaction">res/icons/transactions.png</file>
         <file alias="network">res/icons/network.png</file>
         <file alias="address-book2">res/icons/address-book2.png</file>
