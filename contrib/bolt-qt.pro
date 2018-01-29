@@ -72,6 +72,7 @@ HEADERS += \
     ../src/qt/guiconstants.h \
     ../src/qt/guiutil.h \
     ../src/qt/intro.h \
+    ../src/qt/blockbrowser.h \
     ../src/qt/macdockiconhandler.h \
     ../src/qt/macnotificationhandler.h \
     ../src/qt/monitoreddatamapper.h \
