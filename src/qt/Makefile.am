@@ -123,6 +123,7 @@ QT_MOC = \
   overviewpage.moc \
   rpcconsole.moc
 
+QT_QRC_CPP = qrc_bolt.cpp
 QT_QRC = bolt.qrc
 
 PROTOBUF_CC = paymentrequest.pb.cc
