@@ -179,6 +179,7 @@ BITCOIN_QT_H = \
   walletmodeltransaction.h \
   walletview.h \
   winshutdownmonitor.h \
+  blockbrowser.h \
   masternodelist.h \
   bantablemodel.h \
   peertablemodel.h
