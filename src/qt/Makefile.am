@@ -218,6 +218,8 @@ RES_ICONS = \
   res/icons/lock_closed.png \
   res/icons/lock_open.png \
   res/icons/masternode.png \
+  res/icons/stealth.png \
+  res/icons/search.png \
   res/icons/network.png \
   res/icons/open.png \
   res/icons/overview.png \
