@@ -82,13 +82,13 @@ public:
         vSeeds.push_back(CDNSSeedData("Mainnet", "104.131.51.223"));
         vSeeds.push_back(CDNSSeedData("Secondnet", "104.131.5.203"));        
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of(26);                     // BOLT addresses start with 'X'
-        base58Prefixes[SCRIPT_ADDRESS] = list_of(  4);                    // BOLT script addresses start with '7'
-        base58Prefixes[SECRET_KEY] =     list_of(28 + 128);               // BOLT private keys start with '7' or 'X'
-        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0xFE)(0x52)(0xF8); // BOLT BIP32 pubkeys start with 'drkv'
-        base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0xFE)(0x52)(0xCC); // BOLT BIP32 prvkeys start with 'drkp'
-        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000005);             // BOLT BIP44 coin type is '5'
-        base58Prefixes[STEALTH_ADDRESS] = list_of(55);                    // BOLT private address start with 'P'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,26);                     // BOLT addresses start with 'X'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,4);                    // BOLT script addresses start with '7'
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1, 28 + 128);               // BOLT private keys start with '7' or 'X'
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0xFE)(0x52)(0xF8).convert_to_container<std::vector<unsigned char> >(); // BOLT BIP32 pubkeys start with 'drkv'
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0xFE)(0x52)(0xCC).convert_to_container<std::vector<unsigned char> >(); // BOLT BIP32 prvkeys start with 'drkp'
+        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000005).convert_to_container<std::vector<unsigned char> >();             // BOLT BIP44 coin type is '5'
+        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,55);                    // BOLT private address start with 'P'
 
         // Convert the pnSeeds array into usable address objects.
         for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
@@ -151,13 +151,13 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of( 80);                    // Testnet bolt addresses start with 'x' or 'y'
-        base58Prefixes[SCRIPT_ADDRESS] = list_of( 44);                    // Testnet bolt script addresses start with '8' or '9'
-        base58Prefixes[SECRET_KEY]     = list_of(88 + 128);               // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x3a)(0x80)(0x61)(0xa0); // Testnet bolt BIP32 pubkeys start with 'DRKV'
-        base58Prefixes[EXT_SECRET_KEY] = list_of(0x3a)(0x80)(0x58)(0x37); // Testnet bolt BIP32 prvkeys start with 'DRKP'
-        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000001);             // Testnet bolt BIP44 coin type is '5' (All coin's testnet default)
-        base58Prefixes[STEALTH_ADDRESS] = list_of(117);                    // BOLT private address start with 'p'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 80);                    // Testnet bolt addresses start with 'x' or 'y'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 44);                    // Testnet bolt script addresses start with '8' or '9'
+        base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1, 88 + 128);               // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >(); // Testnet bolt BIP32 pubkeys start with 'DRKV'
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >(); // Testnet bolt BIP32 prvkeys start with 'DRKP'
+        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000001).convert_to_container<std::vector<unsigned char> >();             // Testnet bolt BIP44 coin type is '5' (All coin's testnet default)
+        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,117);                    // BOLT private address start with 'p'
     }
     virtual Network NetworkID() const { return CChainParams::TESTNET; }
 };
