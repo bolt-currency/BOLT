@@ -470,7 +470,7 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
         || GenerateRandomSecret(spend_secret) != 0)
         {
              if (fDebug) printf("Error CWallet Generate Random");
-            return false;
+            return QString::number(false);
         };
 
         /*ec_secret scanSecret;
@@ -488,14 +488,14 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
         {
             //sError = "Could not get scan public key.";
             // if (fDebug) printf("Error CWallet::NewStealthAddress - %s\n", sError.c_str());
-            return false;
+            return QString::number(false);
         };
         
         if (SecretToPublicKey(spend_secret, spend_pubkey) != 0)
         {
             //sError = "Could not get spend public key.";
             // if (fDebug) printf("Error CWallet::NewStealthAddress - %s\n", sError.c_str());
-            return false;
+            return QString::number(false);
         };
 
 
